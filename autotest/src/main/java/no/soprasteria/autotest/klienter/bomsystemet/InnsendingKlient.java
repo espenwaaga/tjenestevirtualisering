@@ -4,7 +4,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
 import no.soprasteria.felles.http.AbstractJerseyRestKlient;
-import no.soprasteria.felles.bomsystem.Forbipassering;
+import no.soprasteria.felles.kontrakter.bomsystem.Forbipassering;
 
 public class InnsendingKlient extends AbstractJerseyRestKlient {
 

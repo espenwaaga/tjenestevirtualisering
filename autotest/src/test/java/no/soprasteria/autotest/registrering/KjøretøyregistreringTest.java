@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import no.soprasteria.autotest.klienter.bomsystemet.InnsendingKlient;
-import no.soprasteria.felles.bomsystem.Forbipassering;
-import no.soprasteria.felles.bomsystem.Forbipasseringsinformasjon;
-import no.soprasteria.felles.bomsystem.Registreringsnummer;
-import no.soprasteria.felles.bomsystem.Sone;
+import no.soprasteria.felles.kontrakter.bomsystem.Forbipassering;
+import no.soprasteria.felles.kontrakter.bomsystem.Forbipasseringsinformasjon;
+import no.soprasteria.felles.kontrakter.bomsystem.Registreringsnummer;
+import no.soprasteria.felles.kontrakter.bomsystem.Sone;
 
 class KjøretøyregistreringTest {
 

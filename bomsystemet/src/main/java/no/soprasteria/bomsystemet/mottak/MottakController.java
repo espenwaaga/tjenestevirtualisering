@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import no.soprasteria.bomsystemet.registeret.Forbipasseringsregister;
-import no.soprasteria.felles.bomsystem.Forbipassering;
+import no.soprasteria.felles.kontrakter.bomsystem.Forbipassering;
 
 @RestController()
 @RequestMapping(MottakController.MOTTAK_PATH)
 public class MottakController {
-    private static final Logger LOG = LoggerFactory.getLogger(MottakController.class);
     public static final String MOTTAK_PATH = "/mottak";
+    private static final Logger LOG = LoggerFactory.getLogger(MottakController.class);
 
     private final Forbipasseringsregister forbipasseringsregister;
 

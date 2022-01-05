@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import no.soprasteria.felles.bomsystem.Forbipasseringsinformasjon;
-import no.soprasteria.felles.bomsystem.Registreringsnummer;
+import no.soprasteria.felles.kontrakter.bomsystem.Forbipasseringsinformasjon;
+import no.soprasteria.felles.kontrakter.bomsystem.Registreringsnummer;
 
 public class Forbipasseringsregister {
 
