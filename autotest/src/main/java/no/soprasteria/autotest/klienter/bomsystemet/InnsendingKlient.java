@@ -11,15 +11,12 @@ import no.soprasteria.felles.kontrakter.vtp.Registreringsnummer;
 
 public class InnsendingKlient extends AbstractJerseyRestKlient {
 
+    private static final String CONTEXT_PATH = "/api";
     private static final String BOMSYSTEMET_BASE_URI = "http://localhost:8080";
-    private static final String BOMSYSTEMET_CONTEXT_PATH = "/api";
-
-    private static final String REGISTRER_FORBIPASSERING_PATH = BOMSYSTEMET_CONTEXT_PATH + "/mottak";
-
     private static final String VTP_BASE_URI = "http://localhost:8060";
-    private static final String VTP_CONTEXT_PATH = "/api";
-    private static final String VTP_KJØRETØY_PATH = VTP_CONTEXT_PATH + "/mottak";
-    private static final String VTP_KJØRETØY_OPPSLAG_PATH = VTP_CONTEXT_PATH + "/oppslag";
+
+    private static final String REGISTRER_FORBIPASSERING_PATH = CONTEXT_PATH + "/mottak";
+    private static final String VTP_KJØRETØY_PATH = CONTEXT_PATH + "/kjøretøy";
 
 
     public void registererKjøretøy(Forbipassering forbipassering) {
@@ -38,7 +35,7 @@ public class InnsendingKlient extends AbstractJerseyRestKlient {
 
     public KjøretøyInfo hentKjøretøyInfo(Registreringsnummer registreringsnummer) {
         return client.target(VTP_BASE_URI)
-                .path(VTP_KJØRETØY_OPPSLAG_PATH + "/" + registreringsnummer.value())
+                .path(VTP_KJØRETØY_PATH + "/" + registreringsnummer.value())
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .get(KjøretøyInfo.class);
 

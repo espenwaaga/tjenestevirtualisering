@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController()
 public class RestKontroller {
-    public static final String MOTTAK_PATH = "/mottak";
-    public static final String OPPSLAG_PATH = "/oppslag";
+    public static final String KJØRETØY_PATH = "/kjøretøy";
     private static final Logger LOG = LoggerFactory.getLogger(RestKontroller.class);
 
     private final Kjøretøyregister kjøretøyregister;
@@ -22,14 +21,14 @@ public class RestKontroller {
         this.kjøretøyregister = kjøretøyregister;
     }
 
-    @PostMapping(value = MOTTAK_PATH)
+    @PostMapping(value = KJØRETØY_PATH)
     public void registrerKjøretøy(@RequestBody Kjøretøy kjøretøy) {
         LOG.info("Registrert bil med registernummer {}",kjøretøy.registreringsnummer());
         kjøretøyregister.add(kjøretøy.registreringsnummer(), kjøretøy.kjøretøyInfo());
         LOG.info("Registernummer i register: {}", kjøretøyregister);
     }
 
-    @GetMapping(value = OPPSLAG_PATH + "/{registreringsnummer}")
+    @GetMapping(value = KJØRETØY_PATH + "/{registreringsnummer}")
     public KjøretøyInfo hentKjøretøyInfo(@PathVariable("registreringsnummer") Registreringsnummer registreringsnummer) {
         LOG.info("Henter info for: {}", registreringsnummer);
         return kjøretøyregister.get(registreringsnummer);
