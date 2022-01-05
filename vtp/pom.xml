@@ -8,14 +8,17 @@
 		<version>2.6.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>no.soprasteria</groupId>
+
+	<groupId>no.soprasteria.vtp</groupId>
 	<artifactId>vtp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>vtp</name>
 	<description>Demo prosjekt for Tjenestevirtualisering</description>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
