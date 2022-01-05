@@ -1,4 +1,4 @@
-package no.soprasteria.bomsystemet.mottak;
+package no.soprasteria.felles.bomsystem;
 
 public enum Sone {
     SONE1,

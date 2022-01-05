@@ -19,8 +19,7 @@ public abstract class AbstractWebClientConnection implements RetryAware, PingEnd
 
     @Override
     public String ping() {
-        return webClient
-                .get()
+        return webClient.get()
                 .uri(pingEndpoint())
                 .accept(APPLICATION_JSON, TEXT_PLAIN)
                 .retrieve()

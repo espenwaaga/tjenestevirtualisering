@@ -1,6 +1,5 @@
 package no.soprasteria.bomsystemet.registeret;
 
-import static java.util.Collections.emptyList;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 import java.util.ArrayList;
@@ -8,10 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.util.CollectionUtils;
-
-import no.soprasteria.bomsystemet.mottak.Forbipasseringsinformasjon;
-import no.soprasteria.bomsystemet.mottak.Registreringsnummer;
+import no.soprasteria.felles.bomsystem.Forbipasseringsinformasjon;
+import no.soprasteria.felles.bomsystem.Registreringsnummer;
 
 public class Forbipasseringsregister {
 

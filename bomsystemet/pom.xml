@@ -8,14 +8,18 @@
 		<version>2.6.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>no.soprasteria</groupId>
+
+	<groupId>no.soprasteria.bomsystemet</groupId>
 	<artifactId>bomsystemet</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bomsystemet</name>
 	<description>Demo prosjekt for Tjenestevirtualisering</description>
+	<packaging>jar</packaging>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -52,20 +56,15 @@
 			<artifactId>spring-retry</artifactId>
 			<version>1.3.1</version>
 		</dependency>
+		<dependency>
+			<groupId>no.soprasteria.felles</groupId>
+			<artifactId>felles</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<parameters>true</parameters>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<release>${java.version}</release>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
