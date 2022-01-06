@@ -22,14 +22,14 @@ public class InnsendingKlient extends AbstractJerseyRestKlient {
     public void registererKjøretøy(Forbipassering forbipassering) {
         client.target(BOMSYSTEMET_BASE_URI)
                 .path(REGISTRER_FORBIPASSERING_PATH)
-                .request(MediaType.APPLICATION_JSON_TYPE)
+                .request()
                 .post(Entity.json(forbipassering));
     }
 
     public void lagKjøretøy(Kjøretøy kjøretøy) {
         client.target(VTP_BASE_URI)
                 .path(VTP_KJØRETØY_PATH)
-                .request(MediaType.APPLICATION_JSON_TYPE)
+                .request()
                 .post(Entity.json(kjøretøy));
     }
 
