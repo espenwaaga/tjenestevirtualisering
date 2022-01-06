@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import no.soprasteria.felles.kontrakter.bomsystem.Forbipasseringsinformasjon;
-import no.soprasteria.felles.kontrakter.bomsystem.Registreringsnummer;
+import no.soprasteria.felles.kontrakter.vtp.Registreringsnummer;
 
 public class Forbipasseringsregister {
 

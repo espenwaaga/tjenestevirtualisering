@@ -4,7 +4,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
 import no.soprasteria.felles.http.AbstractJerseyRestKlient;
-import no.soprasteria.felles.kontrakter.bomsystem.Registreringsnummer;
+import no.soprasteria.felles.kontrakter.vtp.Registreringsnummer;
 
 public class OppslagsKlient extends AbstractJerseyRestKlient {
 
