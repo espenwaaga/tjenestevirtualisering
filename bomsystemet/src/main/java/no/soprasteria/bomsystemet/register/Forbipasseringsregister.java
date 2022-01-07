@@ -1,4 +1,4 @@
-package no.soprasteria.bomsystemet.registeret;
+package no.soprasteria.bomsystemet.register;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import no.soprasteria.felles.kontrakter.bomsystem.Forbipasseringsinformasjon;
-import no.soprasteria.felles.kontrakter.vtp.Registreringsnummer;
+import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
+import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipasseringsinformasjon;
 
 public class Forbipasseringsregister {
 
@@ -27,6 +27,10 @@ public class Forbipasseringsregister {
             }
             eksisterendeForbipasseringer.add(forbipasseringsinformasjon);
         }
+    }
+
+    public List<Forbipasseringsinformasjon> get(Registreringsnummer registreringsnummer) {
+        return register.get(registreringsnummer);
     }
 
     @Override

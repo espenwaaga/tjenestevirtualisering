@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import no.soprasteria.bomsystemet.registeret.Forbipasseringsregister;
-import no.soprasteria.felles.kontrakter.bomsystem.Forbipassering;
+import no.soprasteria.bomsystemet.register.Forbipasseringsregister;
+import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipassering;
 
 @RestController()
 @RequestMapping(MottakController.MOTTAK_PATH)
@@ -24,7 +24,7 @@ public class MottakController {
         this.forbipasseringsregister = forbipasseringsregister;
     }
 
-    @PostMapping()
+    @PostMapping
     public void registrerForbipassering(@RequestBody Forbipassering forbipassering) {
         LOG.info("Registerer passering for {}", forbipassering.registreringsnummer());
         forbipasseringsregister.add(forbipassering.registreringsnummer(), forbipassering.forbipasseringsinformasjon());
