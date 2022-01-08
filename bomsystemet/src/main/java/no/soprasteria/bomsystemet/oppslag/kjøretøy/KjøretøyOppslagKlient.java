@@ -1,25 +1,45 @@
 package no.soprasteria.bomsystemet.oppslag.kjøretøy;
 
+import java.net.URI;
+
 import javax.ws.rs.core.MediaType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.ConstructorBinding;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import no.soprasteria.felles.http.AbstractJerseyRestKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
 
-@Component
-@ConfigurationProperties(prefix = "oppslag.kjoretoy") // TODO: Hvorfor fungere ikke dette?
+@ConfigurationProperties(prefix = "oppslag.kjoretoy")
 public class KjøretøyOppslagKlient extends AbstractJerseyRestKlient {
 
+    private static final Logger LOG = LoggerFactory.getLogger(KjøretøyOppslagKlient.class);
     private static final String DEFAULT_BASE_URL = "http://veivesenet";
-    private static final String KJØRETØY_OPPSLAG_PATH = "/api/kjøretøy";
+    private static final String DEFAULT_KJØRETØY_OPPSLAG_PATH = "/api/kjøretøy";
+
+    private final URI baseUrl;
+    private final String oppslagPath;
+
+    @ConstructorBinding
+    public KjøretøyOppslagKlient(@DefaultValue(DEFAULT_BASE_URL) URI baseUrl,
+                                 @DefaultValue(DEFAULT_KJØRETØY_OPPSLAG_PATH) String oppslagPath) {
+        this.baseUrl = baseUrl;
+        this.oppslagPath = oppslagPath;
+    }
 
     public KjøretøyInfo hentInformasjonOmKjøretøy(Registreringsnummer registreringsnummer) {
-        return client.target(DEFAULT_BASE_URL)
-                .path(KJØRETØY_OPPSLAG_PATH + "/" + registreringsnummer.value())
+        LOG.info("Henter informasjon om kjøretøy med registreringsnummer {}", registreringsnummer);
+        return client.target(baseUrl)
+                .path(getOppslagPath(registreringsnummer))
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .get(KjøretøyInfo.class);
+    }
+
+    private String getOppslagPath(Registreringsnummer registreringsnummer) {
+        return oppslagPath + "/" + registreringsnummer.value();
     }
 }

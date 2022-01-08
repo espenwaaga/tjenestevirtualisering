@@ -2,8 +2,8 @@ package no.soprasteria.bomsystemet.beregning;
 
 import org.springframework.stereotype.Component;
 
+import no.soprasteria.bomsystemet.database.Forbipasseringsregister;
 import no.soprasteria.bomsystemet.oppslag.kjøretøy.KjøretøyOppslagKlient;
-import no.soprasteria.bomsystemet.register.Forbipasseringsregister;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Sone;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;

@@ -1,4 +1,4 @@
-package no.soprasteria.bomsystemet.mottak;
+package no.soprasteria.bomsystemet.registrering;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import no.soprasteria.bomsystemet.register.Forbipasseringsregister;
+import no.soprasteria.bomsystemet.database.Forbipasseringsregister;
 import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipassering;
 
 @RestController()
-@RequestMapping(MottakController.MOTTAK_PATH)
-public class MottakController {
+@RequestMapping(BomregistreringKontroller.MOTTAK_PATH)
+public class BomregistreringKontroller {
     public static final String MOTTAK_PATH = "/mottak";
-    private static final Logger LOG = LoggerFactory.getLogger(MottakController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BomregistreringKontroller.class);
 
     private final Forbipasseringsregister forbipasseringsregister;
 
     @Autowired
-    public MottakController(Forbipasseringsregister forbipasseringsregister) {
+    public BomregistreringKontroller(Forbipasseringsregister forbipasseringsregister) {
         this.forbipasseringsregister = forbipasseringsregister;
     }
 

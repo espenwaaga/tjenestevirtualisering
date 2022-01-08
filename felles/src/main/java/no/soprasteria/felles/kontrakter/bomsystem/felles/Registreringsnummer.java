@@ -22,8 +22,6 @@ public record Registreringsnummer(@JsonValue String value) {
 
     @Override
     public String toString() {
-        return "Registreringsnummer{" +
-                "value='" + value + '\'' +
-                '}';
+        return value();
     }
 }
