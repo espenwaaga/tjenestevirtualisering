@@ -1,4 +1,4 @@
-package no.soprasteria.bomsystemet.oppslag;
+package no.soprasteria.felles.kontrakter.bomsystem.person;
 
 public record Adresse(String addresse,
                       int postnummer,

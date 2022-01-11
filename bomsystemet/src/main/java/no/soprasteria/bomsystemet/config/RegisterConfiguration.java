@@ -1,10 +1,12 @@
-package no.soprasteria.bomsystemet.registeret;
+package no.soprasteria.bomsystemet.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import no.soprasteria.bomsystemet.database.Forbipasseringsregister;
+
 @Configuration
-public class ForbipasseringsregisterConfiguration {
+public class RegisterConfiguration {
 
     @Bean
     public Forbipasseringsregister forbipasseringsregister() {

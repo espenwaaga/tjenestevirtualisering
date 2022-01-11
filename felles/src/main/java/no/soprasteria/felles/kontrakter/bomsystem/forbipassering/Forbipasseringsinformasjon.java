@@ -1,4 +1,4 @@
-package no.soprasteria.felles.kontrakter.bomsystem;
+package no.soprasteria.felles.kontrakter.bomsystem.forbipassering;
 
 import java.time.LocalDate;
 

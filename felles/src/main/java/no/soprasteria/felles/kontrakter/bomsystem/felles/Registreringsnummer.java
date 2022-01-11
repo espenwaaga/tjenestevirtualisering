@@ -1,10 +1,10 @@
-package no.soprasteria.felles.kontrakter.vtp;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+package no.soprasteria.felles.kontrakter.bomsystem.felles;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 public record Registreringsnummer(@JsonValue String value) {
 
@@ -22,8 +22,6 @@ public record Registreringsnummer(@JsonValue String value) {
 
     @Override
     public String toString() {
-        return "Registreringsnummer{" +
-                "value='" + value + '\'' +
-                '}';
+        return value();
     }
 }

@@ -4,10 +4,10 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
 import no.soprasteria.felles.http.AbstractJerseyRestKlient;
-import no.soprasteria.felles.kontrakter.bomsystem.Forbipassering;
-import no.soprasteria.felles.kontrakter.vtp.Kjøretøy;
-import no.soprasteria.felles.kontrakter.vtp.KjøretøyInfo;
-import no.soprasteria.felles.kontrakter.vtp.Registreringsnummer;
+import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
+import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipassering;
+import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Kjøretøy;
+import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
 
 public class InnsendingKlient extends AbstractJerseyRestKlient {
 
