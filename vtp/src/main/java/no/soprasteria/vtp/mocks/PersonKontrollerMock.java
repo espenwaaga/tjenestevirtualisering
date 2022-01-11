@@ -28,7 +28,7 @@ public class PersonKontrollerMock {
     }
 
     @GetMapping(value = "/{fnr}")
-    public PersonInformasjon hentKjøretøyInfo(@PathVariable("fnr") Fødselsnummer fnr) {
+    public PersonInformasjon hentPersonInfo(@PathVariable("fnr") Fødselsnummer fnr) {
         LOG.info("Henter informasjon om borger [{}]", fnr.value());
         var personinfo = personregister.get(fnr);
         if (personinfo == null) {
