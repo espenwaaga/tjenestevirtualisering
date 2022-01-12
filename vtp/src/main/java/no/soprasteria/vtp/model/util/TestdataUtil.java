@@ -10,7 +10,7 @@ public class TestdataUtil {
     private TestdataUtil() {
     }
 
-    private static Random RANDOM = new Random();
+    private static final Random RANDOM = new Random();
 
     public static LocalDate generateRandomPlausibleBirtdayParent() {
         var startRange = LocalDate.of(1960, 1, 1);
@@ -48,35 +48,4 @@ public class TestdataUtil {
 
         return LocalDate.ofEpochDay(randomEpochDay);
     }
-
-//    public static PersonNavn getSokerName(SøkerModell søker) {
-//        PersonNavn personNavn;
-//        if (søker.getKjønn().equals(BrukerModell.Kjønn.K)) {
-//            personNavn = FiktivtNavn.getRandomFemaleName();
-//        } else {
-//            personNavn = FiktivtNavn.getRandomMaleName();
-//        }
-//        return personNavn;
-//    }
-
-    /**
-     *  Tar høyde for at gifte folk deler etternavn.
-     */
-//    public static PersonNavn getAnnenPartName(SøkerModell søker, AnnenPartModell annenPart) {
-//        PersonNavn personNavn;
-//        if (søker.getSivilstand().getSivilstandType().equals(SivilstandModell.Sivilstander.GIFT)) {
-//            if (annenPart.getKjønn().equals(BrukerModell.Kjønn.K)) {
-//                personNavn = FiktivtNavn.getRandomFemaleName(søker.getEtternavn());
-//            } else {
-//                personNavn = FiktivtNavn.getRandomMaleName(søker.getEtternavn());
-//            }
-//        } else {
-//            if (annenPart.getKjønn().equals(BrukerModell.Kjønn.K)) {
-//                personNavn = FiktivtNavn.getRandomFemaleName();
-//            } else {
-//                personNavn = FiktivtNavn.getRandomMaleName();
-//            }
-//        }
-//        return personNavn;
-//    }
 }

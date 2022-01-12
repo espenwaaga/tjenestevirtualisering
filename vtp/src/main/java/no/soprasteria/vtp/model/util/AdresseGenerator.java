@@ -14,7 +14,7 @@ public class AdresseGenerator {
     private static final String resourceName = "/basedata/adresse-maler.json";
     private static final Random RANDOM = new Random();
 
-    private List<Adresse>  adresseList = loadAdresser();
+    private final List<Adresse>  adresseList = loadAdresser();
 
     public AdresseGenerator()  {
     }

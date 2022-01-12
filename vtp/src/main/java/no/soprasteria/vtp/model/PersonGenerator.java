@@ -9,8 +9,6 @@ import no.soprasteria.vtp.model.identer.FiktiveFnr;
 import no.soprasteria.vtp.model.util.AdresseGenerator;
 import no.soprasteria.vtp.model.util.NavnGenerator;
 
-import java.util.Random;
-
 import static no.soprasteria.felles.kontrakter.bomsystem.person.Kjønn.randomKjonn;
 
 public class PersonGenerator {
@@ -18,9 +16,6 @@ public class PersonGenerator {
     NavnGenerator navnGenerator = new NavnGenerator();
     AdresseGenerator adresseGenerator = new AdresseGenerator();
     FiktiveFnr fiktiveFnr = new FiktiveFnr();
-
-    private static final Random RANDOM = new Random();
-
 
     Person lagFiktivPerson() {
         var fiktivPerson = new FiktivPerson();
@@ -44,7 +39,6 @@ public class PersonGenerator {
                 fiktivPerson.adresse,
                 "test@test.no"
         );
-
     }
 
     private Navn mapNavn(FiktivPerson fiktivPerson) {
@@ -52,7 +46,7 @@ public class PersonGenerator {
     }
 
 
-    public class FiktivPerson {
+    static class FiktivPerson {
         String fornavn;
         String etternavn;
         String fnr;

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Random;
 
 public class FoedselsnummerGenerator {
@@ -15,9 +16,9 @@ public class FoedselsnummerGenerator {
     private final static Integer DNR_OFFSETT_DAYS = 40;
     private final static Random random = new Random();
 
-    private Kjønn kjonn;
-    private IdentType identType;
-    private LocalDate fodselsdato;
+    private final Kjønn kjonn;
+    private final IdentType identType;
+    private final LocalDate fodselsdato;
 
     private FoedselsnummerGenerator(FodselsnummerGeneratorBuilder fgb){
         if(fgb.kjonn != null) {
@@ -25,16 +26,8 @@ public class FoedselsnummerGenerator {
         } else {
             this.kjonn = Kjønn.randomKjonn();
         }
-        if(fgb.identType != null) {
-            this.identType = fgb.identType;
-        } else {
-            this.identType = IdentType.FNR;
-        }
-        if(fgb.fodselsdato != null){
-            this.fodselsdato = fgb.fodselsdato;
-        } else {
-            this.fodselsdato = TestdataUtil.generateRandomPlausibleBirtdayParent();
-        }
+        this.identType = Objects.requireNonNullElse(fgb.identType, IdentType.FNR);
+        this.fodselsdato = Objects.requireNonNullElseGet(fgb.fodselsdato, TestdataUtil::generateRandomPlausibleBirtdayParent);
     }
 
     private static int getDigit(String text, int index) {
@@ -113,8 +106,6 @@ public class FoedselsnummerGenerator {
         private Kjønn kjonn;
         private IdentType identType;
         private LocalDate fodselsdato;
-
-        public void FodselsnummerGenerator(){}
 
         public FodselsnummerGeneratorBuilder kjonn(Kjønn k){
             this.kjonn = k;

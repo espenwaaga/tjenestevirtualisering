@@ -5,14 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class NavnGenerator {
 
     private static final Random RANDOM = new Random();
-    private List<String> etternavn = loadNames("/basedata/etternavn.txt");
-    private List<String> fornavnKvinner = loadNames("/basedata/fornavn-kvinner.txt");
-    private List<String> fornavnMenn = loadNames("/basedata/fornavn-menn.txt");
+    private final List<String> etternavn = loadNames("/basedata/etternavn.txt");
+    private final List<String> fornavnKvinner = loadNames("/basedata/fornavn-kvinner.txt");
+    private final List<String> fornavnMenn = loadNames("/basedata/fornavn-menn.txt");
 
     public String getRandomFornavnMann() {
         return getRandom(fornavnMenn);
@@ -29,7 +30,7 @@ public class NavnGenerator {
 
     private static List<String> loadNames(String resourceName) {
         try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(NavnGenerator.class.getResourceAsStream(resourceName)))) {
+                new InputStreamReader(Objects.requireNonNull(NavnGenerator.class.getResourceAsStream(resourceName))))) {
             final List<String> resultat = new ArrayList<>();
             String strLine;
             while ((strLine = br.readLine()) != null) {
