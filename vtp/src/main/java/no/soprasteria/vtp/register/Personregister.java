@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
-import no.soprasteria.felles.kontrakter.bomsystem.person.PersonInformasjon;
+import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
 
 public class Personregister {
-    private final Map<Fødselsnummer, PersonInformasjon> register = new HashMap<>();
+    private final Map<Fødselsnummer, Person> register = new HashMap<>();
 
-    public void add(Fødselsnummer fødselsnummer, PersonInformasjon personInformasjon) {
+    public void add(Fødselsnummer fødselsnummer, Person personInformasjon) {
         if (register.containsKey(fødselsnummer)){
             register.replace(fødselsnummer, personInformasjon);
             return;
@@ -17,7 +17,7 @@ public class Personregister {
         register.put(fødselsnummer, personInformasjon);
     }
 
-    public PersonInformasjon get(Fødselsnummer fødselsnummer) {
+    public Person get(Fødselsnummer fødselsnummer) {
         return register.get(fødselsnummer);
     }
 

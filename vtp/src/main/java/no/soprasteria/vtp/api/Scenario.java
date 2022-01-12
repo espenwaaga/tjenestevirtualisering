@@ -1,7 +1,8 @@
 package no.soprasteria.vtp.api;
 
-import java.util.List;
-
+import no.soprasteria.felles.kontrakter.vtp.TestscenarioData;
+import no.soprasteria.vtp.register.Kjøretøyregister;
+import no.soprasteria.vtp.register.Personregister;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import no.soprasteria.felles.kontrakter.bomsystem.vtp.TestscenarioData;
-import no.soprasteria.vtp.register.Kjøretøyregister;
-import no.soprasteria.vtp.register.Personregister;
+import java.util.List;
 
 @RestController()
 @RequestMapping(no.soprasteria.vtp.mocks.PersonKontrollerMock.PERSON_PATH)
@@ -41,11 +40,11 @@ public class Scenario {
     }
 
     private void fyllRegisterMedScenarioInformasjon(TestscenarioData testscenarioData) {
-        LOG.info("Fyller registrene med opplysninger for bruker {}", testscenarioData.personInformasjon().fnr());
-        var fnr = testscenarioData.personInformasjon().fnr();
+        LOG.info("Fyller registrene med opplysninger for bruker {}", testscenarioData.person().fnr());
+        var fnr = testscenarioData.person().fnr();
         var kjøretøy = testscenarioData.kjøretøy();
 
-        personregister.add(fnr, testscenarioData.personInformasjon());
-        kjøretøyregister.add(fnr, testscenarioData.personInformasjon());
+        personregister.add(fnr, testscenarioData.person());
+//        kjøretøyregister.add(fnr, testscenarioData.personInformasjon());
     }
 }

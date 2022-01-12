@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import no.soprasteria.felles.http.AbstractJerseyRestKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
-import no.soprasteria.felles.kontrakter.bomsystem.person.PersonInformasjon;
+import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
 
 @ConfigurationProperties(prefix = "oppslag.person")
 public class PersonOppslagKlient extends AbstractJerseyRestKlient {
@@ -31,12 +31,12 @@ public class PersonOppslagKlient extends AbstractJerseyRestKlient {
         this.oppslagPath = oppslagPath;
     }
 
-    public PersonInformasjon hentOpplysninger(Fødselsnummer fnr) {
+    public Person hentOpplysninger(Fødselsnummer fnr) {
         LOG.info("Henter personinformasjon om person med fødselsnummer {}", fnr);
         return client.target(baseUrl)
                 .path(getOppslagPath(fnr))
                 .request(MediaType.APPLICATION_JSON_TYPE)
-                .get(PersonInformasjon.class);
+                .get(Person.class);
     }
 
     private String getOppslagPath(Fødselsnummer fødselsnummer) {
