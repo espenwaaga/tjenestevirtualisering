@@ -1,8 +1,10 @@
 package no.soprasteria.vtp.api;
 
-import no.soprasteria.felles.kontrakter.vtp.TestscenarioData;
+import no.soprasteria.felles.kontrakter.vtp.TestdataBestilling;
 import no.soprasteria.vtp.register.Kjøretøyregister;
 import no.soprasteria.vtp.register.Personregister;
+import no.soprasteria.vtp.testdataGenerator.KjøretøyGenerator;
+import no.soprasteria.vtp.testdataGenerator.PersonGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +13,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController()
-@RequestMapping(no.soprasteria.vtp.mocks.PersonKontrollerMock.PERSON_PATH)
+@RequestMapping(Scenario.SCENARIO_PATH)
 public class Scenario {
+
+    public static final String SCENARIO_PATH= "/scenario";
     private static final Logger LOG = LoggerFactory.getLogger(Scenario.class);
     private final Personregister personregister;
     private final Kjøretøyregister kjøretøyregister;
+
+    public final PersonGenerator personGenerator = new PersonGenerator();
+    public final KjøretøyGenerator kjøretøyGenerator = new KjøretøyGenerator();
 
     @Autowired
     public Scenario(Personregister personregister, Kjøretøyregister kjøretøyregister) {
@@ -27,24 +32,19 @@ public class Scenario {
     }
 
     @PostMapping
-    public void instansierTestscenario(@RequestBody TestscenarioData testscenarioData) {
-        fyllRegisterMedScenarioInformasjon(testscenarioData);
+    public void instansierTestscenario(@RequestBody TestdataBestilling testdataBestilling) {
+        fyllRegisterMedScenarioInformasjon(testdataBestilling);
     }
 
+    private void fyllRegisterMedScenarioInformasjon(TestdataBestilling testdataBestilling) {
+        LOG.info("Fyller registrene med bruker {}", testdataBestilling.getAntallPersoner());
 
-    @PostMapping
-    public void instansierTestscenarioer(@RequestBody List<TestscenarioData> testscenarioData) {
-        for (var data : testscenarioData) {
-            fyllRegisterMedScenarioInformasjon(data);
+        for (int i = 0 ; i < testdataBestilling.getAntallPersoner() ; i++) {
+            var person = personGenerator.lagFiktivPerson();
+            personregister.add(person);
+            kjøretøyregister.add(kjøretøyGenerator.lagFiktivtKjøretøy(person.fnr()));
         }
+
     }
 
-    private void fyllRegisterMedScenarioInformasjon(TestscenarioData testscenarioData) {
-        LOG.info("Fyller registrene med opplysninger for bruker {}", testscenarioData.person().fnr());
-        var fnr = testscenarioData.person().fnr();
-        var kjøretøy = testscenarioData.kjøretøy();
-
-        personregister.add(fnr, testscenarioData.person());
-//        kjøretøyregister.add(fnr, testscenarioData.personInformasjon());
-    }
 }

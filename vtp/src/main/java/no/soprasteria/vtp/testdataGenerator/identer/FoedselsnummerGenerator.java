@@ -1,8 +1,8 @@
-package no.soprasteria.vtp.model.identer;
+package no.soprasteria.vtp.testdataGenerator.identer;
 
-import no.soprasteria.vtp.model.enums.IdentType;
+import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.person.Kjønn;
-import no.soprasteria.vtp.model.util.TestdataUtil;
+import no.soprasteria.vtp.testdataGenerator.util.FødselsdagGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,11 +13,9 @@ import java.util.Random;
 public class FoedselsnummerGenerator {
     private final static Logger LOG = LoggerFactory.getLogger(FoedselsnummerGenerator.class);
     private final static Integer NAV_SYNTETISK_IDENT_OFFSET_MND = 40;
-    private final static Integer DNR_OFFSETT_DAYS = 40;
     private final static Random random = new Random();
 
     private final Kjønn kjonn;
-    private final IdentType identType;
     private final LocalDate fodselsdato;
 
     private FoedselsnummerGenerator(FodselsnummerGeneratorBuilder fgb){
@@ -26,8 +24,8 @@ public class FoedselsnummerGenerator {
         } else {
             this.kjonn = Kjønn.randomKjonn();
         }
-        this.identType = Objects.requireNonNullElse(fgb.identType, IdentType.FNR);
-        this.fodselsdato = Objects.requireNonNullElseGet(fgb.fodselsdato, TestdataUtil::generateRandomPlausibleBirtdayParent);
+//        this.identType = Objects.requireNonNullElse(fgb.identType, IdentType.FNR);
+        this.fodselsdato = Objects.requireNonNullElseGet(fgb.fodselsdato, FødselsdagGenerator::genererEnGyldigRandomFødselsdag);
     }
 
     private static int getDigit(String text, int index) {
@@ -39,7 +37,7 @@ public class FoedselsnummerGenerator {
     }
 
 
-    private String generate(){
+    private Fødselsnummer generate(){
         //LOG.info("Vil generere FNR for " + this.kjonn + " født: " + this.fodselsdato + " av type: " + this.identType);
 
         var day = String.format("%02d",this.fodselsdato.getDayOfMonth());
@@ -53,10 +51,6 @@ public class FoedselsnummerGenerator {
             birthNumber = 100+ random.nextInt(900/2) *2 + 1;
         } else {
             birthNumber = 999;
-        }
-
-        if(this.identType == IdentType.DNR){
-            day = String.valueOf(Integer.parseInt(day) + DNR_OFFSETT_DAYS);
         }
 
         int fullYear = this.fodselsdato.getYear();
@@ -96,7 +90,7 @@ public class FoedselsnummerGenerator {
             //Invalid number. Get a new one
             return generate();
         }
-        return withoutControlDigits + control1 + control2;
+        return new Fødselsnummer(withoutControlDigits + control1 + control2);
     }
 
 
@@ -104,16 +98,10 @@ public class FoedselsnummerGenerator {
     public static class FodselsnummerGeneratorBuilder {
 
         private Kjønn kjonn;
-        private IdentType identType;
         private LocalDate fodselsdato;
 
         public FodselsnummerGeneratorBuilder kjonn(Kjønn k){
             this.kjonn = k;
-            return this;
-        }
-
-        public FodselsnummerGeneratorBuilder identType(IdentType i){
-            this.identType = i;
             return this;
         }
 
@@ -122,7 +110,7 @@ public class FoedselsnummerGenerator {
             return this;
         }
 
-        public String buildAndGenerate() {
+        public Fødselsnummer buildAndGenerate() {
             return new FoedselsnummerGenerator(this).generate();
         }
 

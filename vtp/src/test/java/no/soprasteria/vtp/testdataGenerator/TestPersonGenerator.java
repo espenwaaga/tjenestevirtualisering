@@ -1,4 +1,4 @@
-package no.soprasteria.vtp.model;
+package no.soprasteria.vtp.testdataGenerator;
 
 import org.junit.jupiter.api.Test;
 

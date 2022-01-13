@@ -1,10 +1,10 @@
 package no.soprasteria.vtp.register;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Personregister {
     private final Map<Fødselsnummer, Person> register = new HashMap<>();
@@ -15,6 +15,10 @@ public class Personregister {
             return;
         }
         register.put(fødselsnummer, personInformasjon);
+    }
+
+    public void add(Person personInformasjon) {
+        add(personInformasjon.fnr(), personInformasjon);
     }
 
     public Person get(Fødselsnummer fødselsnummer) {

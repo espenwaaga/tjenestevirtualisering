@@ -1,4 +1,4 @@
-package no.soprasteria.vtp.model.util;
+package no.soprasteria.vtp.testdataGenerator.util;
 
 import no.soprasteria.felles.kontrakter.bomsystem.person.Adresse;
 

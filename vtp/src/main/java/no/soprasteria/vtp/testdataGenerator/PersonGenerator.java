@@ -1,13 +1,13 @@
-package no.soprasteria.vtp.model;
+package no.soprasteria.vtp.testdataGenerator;
 
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.person.Adresse;
 import no.soprasteria.felles.kontrakter.bomsystem.person.Kjønn;
 import no.soprasteria.felles.kontrakter.bomsystem.person.Navn;
 import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
-import no.soprasteria.vtp.model.identer.FiktiveFnr;
-import no.soprasteria.vtp.model.util.AdresseGenerator;
-import no.soprasteria.vtp.model.util.NavnGenerator;
+import no.soprasteria.vtp.testdataGenerator.identer.FiktiveFnr;
+import no.soprasteria.vtp.testdataGenerator.util.AdresseGenerator;
+import no.soprasteria.vtp.testdataGenerator.util.NavnGenerator;
 
 import static no.soprasteria.felles.kontrakter.bomsystem.person.Kjønn.randomKjonn;
 
@@ -17,7 +17,7 @@ public class PersonGenerator {
     AdresseGenerator adresseGenerator = new AdresseGenerator();
     FiktiveFnr fiktiveFnr = new FiktiveFnr();
 
-    Person lagFiktivPerson() {
+    public Person lagFiktivPerson() {
         var fiktivPerson = new FiktivPerson();
         fiktivPerson.kjønn = randomKjonn();
 
@@ -35,7 +35,7 @@ public class PersonGenerator {
 
         return new Person(
                 mapNavn(fiktivPerson),
-                new Fødselsnummer(fiktivPerson.fnr),
+                fiktivPerson.fnr,
                 fiktivPerson.adresse,
                 "test@test.no"
         );
@@ -49,7 +49,7 @@ public class PersonGenerator {
     static class FiktivPerson {
         String fornavn;
         String etternavn;
-        String fnr;
+        Fødselsnummer fnr;
         Kjønn kjønn;
         Adresse adresse;
 

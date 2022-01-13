@@ -1,4 +1,4 @@
-package no.soprasteria.vtp.model.util;
+package no.soprasteria.vtp.testdataGenerator.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class NavnGenerator {
     }
 
 
-    private static List<String> loadNames(String resourceName) {
+    private List<String> loadNames(String resourceName) {
         try (BufferedReader br = new BufferedReader(
                 new InputStreamReader(Objects.requireNonNull(NavnGenerator.class.getResourceAsStream(resourceName))))) {
             final List<String> resultat = new ArrayList<>();
@@ -43,7 +43,7 @@ public class NavnGenerator {
         }
     }
 
-    private static synchronized String getRandom(List<String> liste) {
+    private synchronized String getRandom(List<String> liste) {
         return liste.get(RANDOM.nextInt(liste.size()));
     }
 

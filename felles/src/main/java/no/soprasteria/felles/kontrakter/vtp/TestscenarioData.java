@@ -7,5 +7,4 @@ import java.util.List;
 
 public record TestscenarioData(Person person, List<Kjøretøy> kjøretøy) {
 
-//    public TestscenarioData lag()
 }

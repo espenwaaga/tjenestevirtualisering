@@ -14,8 +14,4 @@ public enum Kjønn {
     public static Kjønn randomKjonn() {
         return VALUES.get(RANDOM.nextInt(SIZE));
     }
-
-
-
-
 }
