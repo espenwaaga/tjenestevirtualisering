@@ -1,11 +1,6 @@
 package no.soprasteria.autotest.registrering;
 
-import no.soprasteria.autotest.klienter.bomsystemet.InnsendingKlient;
-import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
-import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
-import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Eier;
-import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Kjøretøy;
-import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
+import no.soprasteria.autotest.klienter.bomsystemet.VtpKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
 import org.junit.jupiter.api.Test;
 
@@ -13,24 +8,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class VtpTest {
 
-    private InnsendingKlient innsendingKlient = new InnsendingKlient();
+    private VtpKlient vtpKlient = new VtpKlient();
 
     @Test
     void lagKjøretøyTest() {
-        var kjøretøy = new Kjøretøy(new Registreringsnummer("DR28292"),
-                new KjøretøyInfo(new Eier(new Fødselsnummer("22222233333")), KjøretøyKlasse.KLASSE1));
 
-        innsendingKlient.lagKjøretøy(kjøretøy);
+        var testdata = vtpKlient.lagKjøretøy(KjøretøyKlasse.KLASSE1);
 
-        var info = innsendingKlient.hentKjøretøyInfo(kjøretøy.registreringsnummer());
-        assertEquals(kjøretøy.kjøretøyInfo(), info);
+        var info = vtpKlient.hentKjøretøyInfo(testdata.kjøretøy().get(0).registreringsnummer());
+        assertEquals(KjøretøyKlasse.KLASSE1, info.kjøretøyKlasse());
     }
 
     @Test
     void lagTestdata() {
 
-        var testdata = innsendingKlient.lagTestdata(100);
-        var bilerIRegister = innsendingKlient.hentKjøretøy();
+        var testdata = vtpKlient.lagTestdata(100);
+        var bilerIRegister = vtpKlient.hentKjøretøy();
 
     }
 }
