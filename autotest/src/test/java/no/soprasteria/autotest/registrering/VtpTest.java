@@ -7,7 +7,6 @@ import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Eier;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Kjøretøy;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
-import no.soprasteria.felles.kontrakter.vtp.TestdataBestilling;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,17 +28,8 @@ class VtpTest {
 
     @Test
     void lagTestdata() {
-        var testdata = new TestdataBestilling();
-        testdata.leggTilEnTestpersonBestilling(1);
-        testdata.leggTilEnTestpersonBestilling(1);
-        testdata.leggTilEnTestpersonBestilling(1);
-        testdata.leggTilEnTestpersonBestilling(1);
-        testdata.leggTilEnTestpersonBestilling(1);
-        testdata.leggTilEnTestpersonBestilling(1);
-        testdata.leggTilEnTestpersonBestilling(1);
-        testdata.leggTilEnTestpersonBestilling(1);
 
-        innsendingKlient.instansierTestscenario(testdata);
+        var testdata = innsendingKlient.lagTestdata(100);
         var bilerIRegister = innsendingKlient.hentKjøretøy();
 
     }

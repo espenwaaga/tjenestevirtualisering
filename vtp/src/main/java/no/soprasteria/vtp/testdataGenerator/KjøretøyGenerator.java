@@ -12,12 +12,14 @@ import java.util.Objects;
 import static no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse.randomKjøretøyKlasse;
 
 public class KjøretøyGenerator {
-    RegistreringsnummerGenerator registreringsnummerGenerator = new RegistreringsnummerGenerator();
 
-    public Kjøretøy lagFiktivtKjøretøy(Fødselsnummer fødselsnummerTilEier) {
+    private KjøretøyGenerator() {
+    }
+
+    public static Kjøretøy lagFiktivtKjøretøy(Fødselsnummer fødselsnummerTilEier) {
         return new Kjøretøy(
                 new Registreringsnummer(
-                        Objects.requireNonNull(registreringsnummerGenerator.getRandomRegistreringsnummer())),
+                        Objects.requireNonNull(RegistreringsnummerGenerator.getRandomRegistreringsnummer())),
                 new KjøretøyInfo(new Eier(fødselsnummerTilEier),
                         randomKjøretøyKlasse())
                 );

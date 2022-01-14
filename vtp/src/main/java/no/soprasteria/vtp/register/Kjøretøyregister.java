@@ -24,6 +24,10 @@ public class Kjøretøyregister {
         add(kjøretøy.registreringsnummer(), kjøretøy.kjøretøyInfo());
     }
 
+    public void add(List<Kjøretøy> kjøretøyList) {
+        kjøretøyList.forEach(this::add);
+    }
+
     public KjøretøyInfo get(Registreringsnummer registreringsnummer) {
         return register.get(registreringsnummer);
     }

@@ -4,6 +4,7 @@ import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Personregister {
@@ -19,6 +20,10 @@ public class Personregister {
 
     public void add(Person personInformasjon) {
         add(personInformasjon.fnr(), personInformasjon);
+    }
+
+    public void add(List<Person> personInformasjon) {
+        personInformasjon.forEach(this::add);
     }
 
     public Person get(Fødselsnummer fødselsnummer) {

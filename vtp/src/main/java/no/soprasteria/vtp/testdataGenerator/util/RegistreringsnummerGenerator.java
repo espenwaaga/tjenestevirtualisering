@@ -11,10 +11,12 @@ import java.util.Random;
 public class RegistreringsnummerGenerator {
 
     private static final Random RANDOM = new Random();
-    private final List<String> registreingsnummer = loadNames("/basedata/registreringsnummer.txt");
+    private static final List<String> registreingsnummer = loadNames("/basedata/registreringsnummer.txt");
 
+    private RegistreringsnummerGenerator() {
+    }
 
-    public String getRandomRegistreringsnummer() {
+    public static String getRandomRegistreringsnummer() {
         if (registreingsnummer.size() <= 0) {
             return null;
         }
@@ -23,14 +25,13 @@ public class RegistreringsnummerGenerator {
         return regnummer;
     }
 
-
-    private synchronized String getRandom() {
+    private static String getRandom() {
         return registreingsnummer.get(RANDOM.nextInt(registreingsnummer.size()));
     }
 
     private static List<String> loadNames(String resourceName) {
         try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(Objects.requireNonNull(NavnGenerator.class.getResourceAsStream(resourceName))))) {
+                new InputStreamReader(Objects.requireNonNull(RegistreringsnummerGenerator.class.getResourceAsStream(resourceName))))) {
             final List<String> resultat = new ArrayList<>();
             String strLine;
             while ((strLine = br.readLine()) != null) {
