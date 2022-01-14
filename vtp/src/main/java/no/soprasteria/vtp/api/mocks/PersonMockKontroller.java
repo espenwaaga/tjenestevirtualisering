@@ -1,4 +1,4 @@
-package no.soprasteria.vtp.mocks;
+package no.soprasteria.vtp.api.mocks;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,15 +15,15 @@ import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
 import no.soprasteria.vtp.register.Personregister;
 
 @RestController()
-@RequestMapping(PersonKontrollerMock.PERSON_PATH)
-public class PersonKontrollerMock {
+@RequestMapping(PersonMockKontroller.PERSON_PATH)
+public class PersonMockKontroller {
     public static final String PERSON_PATH = "/person";
-    private static final Logger LOG = LoggerFactory.getLogger(PersonKontrollerMock.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PersonMockKontroller.class);
 
     private final Personregister personregister;
 
     @Autowired
-    public PersonKontrollerMock(Personregister personregister) {
+    public PersonMockKontroller(Personregister personregister) {
         this.personregister = personregister;
     }
 

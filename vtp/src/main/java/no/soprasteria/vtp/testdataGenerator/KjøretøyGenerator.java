@@ -5,6 +5,7 @@ import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Eier;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Kjøretøy;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
+import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
 import no.soprasteria.vtp.testdataGenerator.util.RegistreringsnummerGenerator;
 
 import java.util.Objects;
@@ -17,11 +18,15 @@ public class KjøretøyGenerator {
     }
 
     public static Kjøretøy lagFiktivtKjøretøy(Fødselsnummer fødselsnummerTilEier) {
+        return lagFiktivtKjøretøy(fødselsnummerTilEier, randomKjøretøyKlasse());
+    }
+
+    public static Kjøretøy lagFiktivtKjøretøy(Fødselsnummer fødselsnummerTilEier, KjøretøyKlasse kjøretøyKlasse) {
         return new Kjøretøy(
                 new Registreringsnummer(
                         Objects.requireNonNull(RegistreringsnummerGenerator.getRandomRegistreringsnummer())),
                 new KjøretøyInfo(new Eier(fødselsnummerTilEier),
-                        randomKjøretøyKlasse())
-                );
+                        kjøretøyKlasse)
+        );
     }
 }
