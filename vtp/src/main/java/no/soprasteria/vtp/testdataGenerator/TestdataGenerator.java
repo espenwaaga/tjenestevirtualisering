@@ -13,7 +13,7 @@ public class TestdataGenerator {
         var personList = new ArrayList<Person>();
         var kjøretøyList = new ArrayList<Kjøretøy>();
 
-        for (int i=0; i <= antallKjøretøy; i++) {
+        for (int i=1; i <= antallKjøretøy; i++) {
             var person = PersonGenerator.lagFiktivPerson();
             personList.add(person);
             kjøretøyList.add(KjøretøyGenerator.lagFiktivtKjøretøy(person.fnr()));

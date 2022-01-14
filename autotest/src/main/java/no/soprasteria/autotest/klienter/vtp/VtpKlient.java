@@ -1,4 +1,4 @@
-package no.soprasteria.autotest.klienter.bomsystemet;
+package no.soprasteria.autotest.klienter.vtp;
 
 import no.soprasteria.felles.http.AbstractJerseyRestKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;

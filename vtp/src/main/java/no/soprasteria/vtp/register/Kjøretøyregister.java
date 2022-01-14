@@ -3,7 +3,6 @@ package no.soprasteria.vtp.register;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Kjøretøy;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
-import no.soprasteria.vtp.api.TestdataKontroller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +13,7 @@ import java.util.Map;
 
 public class Kjøretøyregister {
     private final Map<Registreringsnummer, KjøretøyInfo> register = new HashMap<>();
-    private static final Logger LOG = LoggerFactory.getLogger(TestdataKontroller.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Kjøretøyregister.class);
 
 
     public void add(Registreringsnummer registreringsnummer, KjøretøyInfo kjøretøyInfo) {

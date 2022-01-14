@@ -1,6 +1,6 @@
-package no.soprasteria.autotest.registrering;
+package no.soprasteria.autotest;
 
-import no.soprasteria.autotest.klienter.bomsystemet.VtpKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
 import org.junit.jupiter.api.Test;
 

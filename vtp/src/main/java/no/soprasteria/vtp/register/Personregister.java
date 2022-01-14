@@ -2,7 +2,6 @@ package no.soprasteria.vtp.register;
 
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
-import no.soprasteria.vtp.api.TestdataKontroller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +11,7 @@ import java.util.Map;
 
 public class Personregister {
     private final Map<Fødselsnummer, Person> register = new HashMap<>();
-    private static final Logger LOG = LoggerFactory.getLogger(TestdataKontroller.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Personregister.class);
 
 
     public void add(Fødselsnummer fødselsnummer, Person personInformasjon) {
