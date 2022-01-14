@@ -1,9 +1,5 @@
 package no.soprasteria.autotest.registrering;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
-
 import no.soprasteria.autotest.klienter.bomsystemet.InnsendingKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
@@ -11,6 +7,9 @@ import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Eier;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Kjøretøy;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class VtpTest {
 
@@ -25,5 +24,13 @@ class VtpTest {
 
         var info = innsendingKlient.hentKjøretøyInfo(kjøretøy.registreringsnummer());
         assertEquals(kjøretøy.kjøretøyInfo(), info);
+    }
+
+    @Test
+    void lagTestdata() {
+
+        var testdata = innsendingKlient.lagTestdata(100);
+        var bilerIRegister = innsendingKlient.hentKjøretøy();
+
     }
 }

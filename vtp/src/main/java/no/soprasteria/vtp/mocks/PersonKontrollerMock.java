@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
-import no.soprasteria.felles.kontrakter.bomsystem.person.PersonInformasjon;
+import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
 import no.soprasteria.vtp.register.Personregister;
 
 @RestController()
@@ -28,7 +28,7 @@ public class PersonKontrollerMock {
     }
 
     @GetMapping(value = "/{fnr}")
-    public PersonInformasjon hentKjøretøyInfo(@PathVariable("fnr") Fødselsnummer fnr) {
+    public Person hentPersonInfo(@PathVariable("fnr") Fødselsnummer fnr) {
         LOG.info("Henter informasjon om borger [{}]", fnr.value());
         var personinfo = personregister.get(fnr);
         if (personinfo == null) {

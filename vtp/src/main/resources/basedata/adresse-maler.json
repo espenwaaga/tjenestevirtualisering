@@ -1,0 +1,11 @@
+[ {
+  "gatenavn" : "Fjordlandet",
+  "gatenummer" : 15,
+  "postnummer" : "0575",
+  "poststed": "Oslo"
+}, {
+  "gatenavn" : "Haugesund ally",
+  "gatenummer" : 10,
+  "postnummer" : "1434",
+  "poststed": "As"
+} ]
