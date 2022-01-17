@@ -4,7 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import no.soprasteria.bomsystemet.beregning.Beregning;
-import no.soprasteria.bomsystemet.config.JacksonConfiguration;
 import no.soprasteria.bomsystemet.config.RegisterConfiguration;
 import no.soprasteria.bomsystemet.database.Forbipasseringsregister;
 import no.soprasteria.bomsystemet.oppslag.kjøretøy.KjøretøyOppslagKlient;
@@ -30,10 +29,7 @@ import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {
-        JacksonConfiguration.class,
-        RegisterConfiguration.class
-})
+@ContextConfiguration(classes = RegisterConfiguration.class)
 class BeregningTest {
 
     @Autowired
@@ -60,7 +56,7 @@ class BeregningTest {
     @Test
     void forventerAvgiftVedEnPassering() {
         var registerringsnummer = new Registreringsnummer("SV242526");
-        forbipasseringsregister.add(registerringsnummer, new Forbipasseringsinformasjon(LocalDate.now(), Sone.SONE1));
+        forbipasseringsregister.add(registerringsnummer, new Forbipasseringsinformasjon(LocalDateTime.now(), Sone.SONE1));
         var avgift = beregning.beregnVeiavgift(registerringsnummer);
         assertThat(avgift).isEqualTo(24);
 
@@ -73,8 +69,8 @@ class BeregningTest {
     @Test
     void forventerAvgiftForBeggePasseringene() {
         var registerringsnummer = new Registreringsnummer("SV242526");
-        forbipasseringsregister.add(registerringsnummer, new Forbipasseringsinformasjon(LocalDate.now(), Sone.SONE1));
-        forbipasseringsregister.add(registerringsnummer, new Forbipasseringsinformasjon(LocalDate.now().minusDays(1), Sone.SONE1));
+        forbipasseringsregister.add(registerringsnummer, new Forbipasseringsinformasjon(LocalDateTime.now(), Sone.SONE1));
+        forbipasseringsregister.add(registerringsnummer, new Forbipasseringsinformasjon(LocalDateTime.now().minusDays(1), Sone.SONE1));
         var avgift = beregning.beregnVeiavgift(registerringsnummer);
         assertThat(avgift).isEqualTo(48);
         forbipasseringsregister.remove(registerringsnummer);

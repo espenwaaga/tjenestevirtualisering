@@ -1,5 +1,18 @@
 package no.soprasteria.vtp.api;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
 import no.soprasteria.felles.kontrakter.vtp.Testdata;
 import no.soprasteria.vtp.register.Kjøretøyregister;
@@ -7,21 +20,14 @@ import no.soprasteria.vtp.register.Personregister;
 import no.soprasteria.vtp.testdataGenerator.KjøretøyGenerator;
 import no.soprasteria.vtp.testdataGenerator.PersonGenerator;
 import no.soprasteria.vtp.testdataGenerator.TestdataGenerator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
 
 @RestController()
 @RequestMapping(TestdataKontroller.TESTDATA_PATH)
 public class TestdataKontroller {
 
     public static final String TESTDATA_PATH = "/testdata";
+    private static final String ANTALL_KJØRETØY_PATH_PARAM = "antallKjøretøy";
+    private static final String KJØRETØY_KLASSE_PATH_PARAM = "kjøretøyKlasse";
 
     private static final Logger LOG = LoggerFactory.getLogger(TestdataKontroller.class);
     private final Personregister personregister;
@@ -33,8 +39,8 @@ public class TestdataKontroller {
         this.kjøretøyregister = kjøretøyregister;
     }
 
-    @GetMapping(value = "/{antallKjøretøy}")
-    public Testdata genererTestdata(@PathVariable("antallKjøretøy") int antallKjøretøy) {
+    @GetMapping(value = "/{" + ANTALL_KJØRETØY_PATH_PARAM + "}")
+    public Testdata genererTestdata(@PathVariable(ANTALL_KJØRETØY_PATH_PARAM) int antallKjøretøy) {
         var testdata = TestdataGenerator.lagTestdata(antallKjøretøy);
         if (CollectionUtils.isEmpty(testdata.person()) ||CollectionUtils.isEmpty(testdata.kjøretøy())) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Feil i generering av testdata!");
@@ -43,8 +49,8 @@ public class TestdataKontroller {
         return testdata;
     }
 
-    @GetMapping(value = "/kjøretøy/{kjøretøyKlasse}")
-    public Testdata registrerKjøretøy(@PathVariable("kjøretøyKlasse") KjøretøyKlasse kjøretøyKlasse) {
+    @GetMapping(value = "/kjøretøy/{" + KJØRETØY_KLASSE_PATH_PARAM + "}")
+    public Testdata registrerKjøretøy(@PathVariable(KJØRETØY_KLASSE_PATH_PARAM) KjøretøyKlasse kjøretøyKlasse) {
         LOG.info("Lager bil av klasse: {}", kjøretøyKlasse);
 
         var person = PersonGenerator.lagFiktivPerson();
