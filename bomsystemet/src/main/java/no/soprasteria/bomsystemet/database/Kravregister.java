@@ -118,7 +118,7 @@ public class Kravregister {
 
     @Override
     public String toString() {
-        return "Forbipasseringsregister{" +
+        return "Kravregister{" +
                 "register=" + register +
                 '}';
     }

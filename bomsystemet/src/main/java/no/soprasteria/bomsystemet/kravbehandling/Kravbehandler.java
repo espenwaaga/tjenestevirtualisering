@@ -50,6 +50,26 @@ public class Kravbehandler {
         LOG.info("Tidligere passeringer er innen 1 time og avgiften er derfor 0");
     }
 
+    //  ----------------------------------------------
+    // Ingen endring
+    //            [*      ]
+    //                 *
+    //         => [*   *  ]
+    //  ----------------------------------------------
+    // Nytt krav
+    //            [*      ]
+    //                        *
+    //         => [*      ]  [*      ]
+    //  ----------------------------------------------
+    // Forskyvning
+    //            [*      ]
+    //         *
+    //      =>[*   *  ]
+    //  ----------------------------------------------
+    // Forskyvning + nytt krav
+    //            [*     *]
+    //         *
+    //      =>[*   *  ]  [*     ]
     /**
      * Denne skal tåle forbipasseringer i vilkårlig rekkefølge. Dvs. den tar høyde for forsinkelser eller feil i
      * innsending av forbipasseringer.
