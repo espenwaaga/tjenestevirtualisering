@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import no.soprasteria.bomsystemet.database.Forbipasseringsregister;
+import no.soprasteria.bomsystemet.database.Kravregister;
 
 @Configuration
 public class RegisterConfiguration {
@@ -13,4 +14,8 @@ public class RegisterConfiguration {
         return new Forbipasseringsregister();
     }
 
+    @Bean
+    public Kravregister kravregister() {
+        return new Kravregister();
+    }
 }

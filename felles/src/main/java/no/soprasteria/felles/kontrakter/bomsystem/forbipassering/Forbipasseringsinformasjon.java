@@ -1,6 +1,6 @@
 package no.soprasteria.felles.kontrakter.bomsystem.forbipassering;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public record Forbipasseringsinformasjon(LocalDate tidspunkt, Sone sone) {
+public record Forbipasseringsinformasjon(LocalDateTime tidspunkt, Sone sone) {
 }

@@ -7,6 +7,7 @@ import no.soprasteria.bomsystemet.oppslag.kjøretøy.KjøretøyOppslagKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Sone;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
+import no.soprasteria.felles.kontrakter.bomsystem.krav.Grunnlag;
 
 @Component
 public class Beregning {
@@ -31,7 +32,30 @@ public class Beregning {
         return avgift;
     }
 
-    private int hentSats(Sone sone, KjøretøyKlasse kjøretøyInfo) {
-        return 24; // TODO
+    public int beregnVeiavgift(Grunnlag beregningsgrunnlag) {
+        var registreringsnummer = beregningsgrunnlag.forbipasseringer().get(0).registreringsnummer();
+        var sone = beregningsgrunnlag.forbipasseringer().get(0).forbipasseringsinformasjon().sone();
+
+        var kjøretøyKlasse = oppslag.hentInformasjonOmKjøretøy(registreringsnummer).kjøretøyKlasse();
+        return hentSats(sone, kjøretøyKlasse);
+     }
+
+    private int hentSats(Sone sone, KjøretøyKlasse kjøretøyKlasse) {
+        return satsForKjøretøy(kjøretøyKlasse); //+ soneGebyr(sone);
+    }
+
+    private int soneGebyr(Sone sone) {
+        return switch (sone) {
+            case SONE1 -> 5;
+            case SONE2, SONE3 -> 3;
+        };
+    }
+
+    private int satsForKjøretøy(KjøretøyKlasse kjøretøyKlasse) {
+        return switch (kjøretøyKlasse) {
+            case KLASSE1 -> 12;
+            case KLASSE2 -> 24;
+            case KLASSE3 -> 30;
+        };
     }
 }
