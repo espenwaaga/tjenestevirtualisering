@@ -17,6 +17,7 @@
 
     <properties>
         <java.version>17</java.version>
+        <zalando.problem.version>0.26.0</zalando.problem.version>
     </properties>
 
     <dependencies>
@@ -32,5 +33,16 @@
             <groupId>org.glassfish.jersey.connectors</groupId>
             <artifactId>jersey-apache-connector</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.zalando</groupId>
+            <artifactId>problem</artifactId>
+            <version>${zalando.problem.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.zalando</groupId>
+            <artifactId>jackson-datatype-problem</artifactId>
+            <version>${zalando.problem.version}</version>
+        </dependency>
+
     </dependencies>
 </project>

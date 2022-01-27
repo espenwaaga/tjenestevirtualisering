@@ -1,9 +1,10 @@
-package no.soprasteria.autotest.oppgave;
+package no.soprasteria.autotest.oppgaver;
+
+import org.junit.jupiter.api.Test;
 
 import no.soprasteria.autotest.generator.ForbipasseringGenerator;
-import no.soprasteria.autotest.klienter.bomsystemet.BomsystemKlient;
-import no.soprasteria.autotest.klienter.vtp.VtpKlient;
-import org.junit.jupiter.api.Test;
+import no.soprasteria.autotest.klienter.BomsystemKlient;
+import no.soprasteria.autotest.klienter.VtpKlient;
 
 public class Oppgave01 {
 

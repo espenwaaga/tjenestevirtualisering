@@ -1,0 +1,8 @@
+oppslag:
+  kjoretoy:
+    base-url: http://localhost:8060
+## Legg inn denne her for å redirecte til VTP.
+  person:
+    base-url: http://localhost:8060
+bomregistrering:
+  automatisk-krav: true

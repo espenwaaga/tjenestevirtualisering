@@ -1,10 +1,11 @@
 package no.soprasteria.autotest;
 
-import no.soprasteria.autotest.klienter.vtp.VtpKlient;
-import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import no.soprasteria.autotest.klienter.VtpKlient;
+import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
 
 class VtpTest {
 

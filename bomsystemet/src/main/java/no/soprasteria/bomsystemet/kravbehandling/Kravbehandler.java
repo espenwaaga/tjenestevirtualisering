@@ -69,7 +69,7 @@ public class Kravbehandler {
     // Forskyvning + nytt krav
     //            [*     *]
     //         *
-    //      =>[*   *  ]  [*     ]
+    //      =>[*   *  ] [*     ]
     /**
      * Denne skal tåle forbipasseringer i vilkårlig rekkefølge. Dvs. den tar høyde for forsinkelser eller feil i
      * innsending av forbipasseringer.

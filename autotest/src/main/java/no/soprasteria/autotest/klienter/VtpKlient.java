@@ -1,4 +1,6 @@
-package no.soprasteria.autotest.klienter.vtp;
+package no.soprasteria.autotest.klienter;
+
+import javax.ws.rs.core.MediaType;
 
 import no.soprasteria.felles.http.AbstractJerseyRestKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
@@ -6,8 +8,6 @@ import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
 import no.soprasteria.felles.kontrakter.vtp.RegistreringsnummerList;
 import no.soprasteria.felles.kontrakter.vtp.Testdata;
-
-import javax.ws.rs.core.MediaType;
 
 public class VtpKlient extends AbstractJerseyRestKlient {
     private static final String CONTEXT_PATH = "/api";

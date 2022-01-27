@@ -27,7 +27,7 @@ public class ForbipasseringGenerator {
         return new Forbipassering(registreringsnummer, lagForbipasseringInformasjon(sone));
     }
 
-    public static Forbipassering lagForbipassering(LocalDateTime tidspunkt, Registreringsnummer registreringsnummer) {
+    public static Forbipassering lagForbipassering(Registreringsnummer registreringsnummer, LocalDateTime tidspunkt) {
         return new Forbipassering(
                 registreringsnummer,
                 lagForbipasseringInformasjon(tidspunkt, Sone.random()));

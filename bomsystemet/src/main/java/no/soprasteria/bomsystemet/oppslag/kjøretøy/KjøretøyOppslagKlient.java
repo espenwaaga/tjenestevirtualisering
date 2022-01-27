@@ -33,11 +33,24 @@ public class KjøretøyOppslagKlient extends AbstractJerseyRestKlient {
 
     public KjøretøyInfo hentInformasjonOmKjøretøy(Registreringsnummer registreringsnummer) {
         LOG.info("Henter informasjon om kjøretøy med registreringsnummer {}", registreringsnummer);
-        return client.target(baseUrl)
+        var kjøretøyInfo =  client.target(baseUrl)
                 .path(getOppslagPath(registreringsnummer))
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .get(KjøretøyInfo.class);
+        if (kjøretøyInfo == null) {
+            LOG.warn("Fant ikke kjøretøy i registeret!");
+        }
+        return kjøretøyInfo;
     }
+
+    public boolean finnesKjøretøyIRegister(Registreringsnummer registreringsnummer) {
+        var kjøretøyinfo =  hentInformasjonOmKjøretøy(registreringsnummer);
+        if (kjøretøyinfo == null) {
+            return false;
+        }
+        return true;
+    }
+
 
     private String getOppslagPath(Registreringsnummer registreringsnummer) {
         return oppslagPath + "/" + registreringsnummer.value();

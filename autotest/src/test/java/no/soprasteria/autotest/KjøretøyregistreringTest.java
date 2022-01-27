@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import no.soprasteria.autotest.klienter.bomsystemet.BomsystemKlient;
-import no.soprasteria.autotest.klienter.vtp.VtpKlient;
+import no.soprasteria.autotest.klienter.BomsystemKlient;
+import no.soprasteria.autotest.klienter.VtpKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
 
 class KjøretøyregistreringTest {
@@ -21,10 +21,10 @@ class KjøretøyregistreringTest {
         var testdata = vtpKlient.lagKjøretøy(KjøretøyKlasse.KLASSE1);
 
         var kjøretøy = testdata.kjøretøy().get(0);
-        var forbipassering1 = lagForbipassering(LocalDateTime.now().minusHours(3), kjøretøy.registreringsnummer());
-        var forbipassering2 = lagForbipassering(LocalDateTime.now().minusHours(1).minusMinutes(30), kjøretøy.registreringsnummer());
-        var forbipassering3 = lagForbipassering(LocalDateTime.now().minusHours(1).minusMinutes(10), kjøretøy.registreringsnummer());
-        var forbipassering4 = lagForbipassering(LocalDateTime.now().minusHours(1), kjøretøy.registreringsnummer());
+        var forbipassering1 = lagForbipassering(kjøretøy.registreringsnummer(), LocalDateTime.now().minusHours(3));
+        var forbipassering2 = lagForbipassering(kjøretøy.registreringsnummer(), LocalDateTime.now().minusHours(1).minusMinutes(30));
+        var forbipassering3 = lagForbipassering(kjøretøy.registreringsnummer(), LocalDateTime.now().minusHours(1).minusMinutes(10));
+        var forbipassering4 = lagForbipassering(kjøretøy.registreringsnummer(), LocalDateTime.now().minusHours(1));
 
         bomsystemKlient.registererKjøretøy(forbipassering1);
         bomsystemKlient.registererKjøretøy(forbipassering2);
