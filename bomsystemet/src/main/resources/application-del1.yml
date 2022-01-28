@@ -1,4 +1,9 @@
-## KOMMENTER UT LINJE 2-4 FOR OPPGAVENE I DEL 1:
 #oppslag:
 #  kjoretoy:
-#    base-url: http://localhost:8060
+#    base-url: http://veivesenet
+
+## Erstatt linje 3 med http://localhost:8060 istedenfor.
+#   Fasit:
+   oppslag:
+     kjoretoy:
+       base-url: http://localhost:8060

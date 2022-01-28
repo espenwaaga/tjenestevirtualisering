@@ -36,6 +36,7 @@ public class BomsystemKlient extends AbstractJerseyRestKlient {
             var apiError = response.readEntity(ApiError.class);
             throw new ResponseStatusException(apiError.status(), apiError.message());
         }
+        LOG.info("Registering av {} er vellykket!", forbipassering.registreringsnummer());
         return response.readEntity(Boolean.class);
     }
 

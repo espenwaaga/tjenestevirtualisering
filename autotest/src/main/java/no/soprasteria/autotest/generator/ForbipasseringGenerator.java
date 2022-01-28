@@ -38,6 +38,9 @@ public class ForbipasseringGenerator {
     }
 
     public static Forbipassering lagForbipassering(Registreringsnummer registreringsnummer) {
+        if (registreringsnummer == null) {
+            throw new RuntimeException("Kan ikke lage forbipasseringsinformasjon uten et registreringsnummer!");
+        }
         return new Forbipassering(
                 registreringsnummer,
                 lagForbipasseringInformasjon(Sone.random()));
