@@ -11,13 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
 import no.soprasteria.felles.kontrakter.vtp.RegistreringsnummerList;
+import no.soprasteria.vtp.config.KontrollerKonfig;
 import no.soprasteria.vtp.register.Kjøretøyregister;
 
 @RestController()
 @RequestMapping(KjøretøyMockKontroller.KJØRETØY_PATH)
 public class KjøretøyMockKontroller {
-    public static final String KJØRETØY_PATH = "/kjøretøy";
     private static final Logger LOG = LoggerFactory.getLogger(KjøretøyMockKontroller.class);
+    private static final String REGISTRERINGSNUMMER_PATH_PARAM = "registreringsnummer";
+    protected static final String KJØRETØY_PATH = "/kjøretøy";
 
     private final Kjøretøyregister kjøretøyregister;
 
@@ -26,10 +28,8 @@ public class KjøretøyMockKontroller {
         this.kjøretøyregister = kjøretøyregister;
     }
 
-
-
-    @GetMapping(value = "/{registreringsnummer}")
-    public KjøretøyInfo hentKjøretøyInfo(@PathVariable("registreringsnummer") Registreringsnummer registreringsnummer) {
+    @GetMapping(value = "/{" + REGISTRERINGSNUMMER_PATH_PARAM + "}")
+    public KjøretøyInfo hentKjøretøyInfo(@PathVariable(REGISTRERINGSNUMMER_PATH_PARAM) Registreringsnummer registreringsnummer) {
         LOG.info("Henter informasjon om kjøretøy med regnummer [{}]", registreringsnummer);
         return kjøretøyregister.get(registreringsnummer);
     }

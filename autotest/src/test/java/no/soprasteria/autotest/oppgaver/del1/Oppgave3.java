@@ -1,20 +1,20 @@
 package no.soprasteria.autotest.oppgaver.del1;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import no.soprasteria.autotest.generator.ForbipasseringGenerator;
-import no.soprasteria.autotest.klienter.BomsystemKlient;
-import no.soprasteria.autotest.klienter.VtpKlient;
+import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
 class Oppgave3 {
-    private static final Logger LOG = LoggerFactory.getLogger(BomsystemKlient.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
 
-    private static final BomsystemKlient bomsystemKlient = new BomsystemKlient();
+    private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
     private static final VtpKlient vtpKlient = new VtpKlient();
 
 
@@ -29,7 +29,7 @@ class Oppgave3 {
 
         Registreringsnummer registreringsnummer = null; // Sett dette til et gyldig registreringsnummer
         var forbipassering = ForbipasseringGenerator.lagForbipassering(registreringsnummer);
-        var forbipasseringRegistrert = bomsystemKlient.registererKjøretøy(forbipassering);
+        var forbipasseringRegistrert = bomregistreringsKlient.registererKjøretøy(forbipassering);
         assertThat(forbipasseringRegistrert).isTrue();
     }
 }

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import no.soprasteria.bomsystemet.beregning.Beregning;
 import no.soprasteria.bomsystemet.database.Kravregister;
@@ -97,6 +99,9 @@ public class Kravbehandler {
         var beregningsgrunnlag = new Grunnlag(forbipasseringer);
         var avgift = beregning.beregnVeiavgift(beregningsgrunnlag);
         var personInformasjon = personOppslag.hentOpplysninger(fnr);
+        if (personInformasjon == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Person med fødselsnummer " + fnr + "finnes ikke i registeret til skattetaten!");
+        }
 
         var forbipasseringstidspunkt = forbipassering.forbipasseringsinformasjon().tidspunkt();
         var gyldighetsperiode = new Periode(forbipasseringstidspunkt, forbipasseringstidspunkt.plusHours(1));

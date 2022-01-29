@@ -1,6 +1,7 @@
 package no.soprasteria.autotest.oppgaver.del1;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -10,15 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import no.soprasteria.autotest.generator.ForbipasseringGenerator;
-import no.soprasteria.autotest.klienter.BomsystemKlient;
+import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
 class Oppgave1 {
-    private static final Logger LOG = LoggerFactory.getLogger(BomsystemKlient.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
     private static final String FORVENTET_EXCEPTION_MESSAGE = "Connect to localhost:8060 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed";
     private static final HttpStatus FORVENTET_EXCEPTION_STATUS = HttpStatus.INTERNAL_SERVER_ERROR;
 
-    private static final BomsystemKlient bomsystemKlient = new BomsystemKlient();
+    private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
 
     @Test
     void sendInnForbipasseringerTilBomsystem() {
@@ -26,8 +27,12 @@ class Oppgave1 {
         var forbipassering = ForbipasseringGenerator.lagForbipassering(randomRegistereringsnummer);
 
         // TODO: Kanskje litt vanskelig?
+//        assertThatThrownBy(() -> bomregistreringsKlient.registererKjøretøy(forbipassering))
+//                .isInstanceOf(ResponseStatusException.class)
+//                .hasMessageContaining(FORVENTET_EXCEPTION_MESSAGE);
+
         var exception = assertThrows(ResponseStatusException.class,
-                () -> bomsystemKlient.registererKjøretøy(forbipassering));
+                () -> bomregistreringsKlient.registererKjøretøy(forbipassering));
         assertThat(exception.getMessage()).contains(FORVENTET_EXCEPTION_MESSAGE);
         assertThat(exception.getStatus()).isEqualTo(FORVENTET_EXCEPTION_STATUS);
 

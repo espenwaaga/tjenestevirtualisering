@@ -39,6 +39,8 @@ public class TestdataKontroller {
         this.kjøretøyregister = kjøretøyregister;
     }
 
+
+    // TODO: Er ikke en GET. Her har vi en POST.
     @GetMapping(value = "/{" + ANTALL_KJØRETØY_PATH_PARAM + "}")
     public Testdata genererTestdata(@PathVariable(ANTALL_KJØRETØY_PATH_PARAM) int antallKjøretøy) {
         var testdata = TestdataGenerator.lagTestdata(antallKjøretøy);

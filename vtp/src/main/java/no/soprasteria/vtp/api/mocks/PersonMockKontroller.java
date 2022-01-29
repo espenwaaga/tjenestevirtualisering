@@ -3,22 +3,31 @@ package no.soprasteria.vtp.api.mocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
+import no.soprasteria.vtp.config.KontrollerKonfig;
 import no.soprasteria.vtp.register.Personregister;
 
-@RestController()
-@RequestMapping(PersonMockKontroller.PERSON_PATH)
+
+/**
+ *
+ * For at PersonMOckKontrolleren skal være registert på serveren så måm den annoteres med @RestController()
+ * Vi ønsker å nå denne kontrolleren på 'http://localhost:8060/api/person' og gjør dette med å spesifisere
+ * stien etter http://localhost:8060/api i en @RequestMapping(PersonMockKontroller.PERSON_PATH).
+ */
+
+
+//@RestController()
+//@RequestMapping(PersonMockKontroller.PERSON_PATH)
 public class PersonMockKontroller {
-    public static final String PERSON_PATH = "/person";
     private static final Logger LOG = LoggerFactory.getLogger(PersonMockKontroller.class);
+    private static final String FNR_PATH_PARAM = "fnr";
+    protected static final String PERSON_PATH = "/person";
 
     private final Personregister personregister;
 
@@ -27,13 +36,21 @@ public class PersonMockKontroller {
         this.personregister = personregister;
     }
 
-    @GetMapping(value = "/{fnr}")
-    public Person hentPersonInfo(@PathVariable("fnr") Fødselsnummer fnr) {
-        LOG.info("Henter informasjon om borger [{}]", fnr.value());
-        var personinfo = personregister.get(fnr);
-        if (personinfo == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Person finnes ikke i registeret!");
-        }
-        return personinfo;
-    }
+    /**
+     *
+     * Lag en GET metode for å hente ut person fra personregisteret. Vi kommer til å kalle dette endepunktet på
+     * følgende måte: http://localhost:8060/api/person/22222233333 for å hente informasjon om person med fødselsnummer
+     * 22222233333. Endepunktet må ha følgende være:
+     *  1) Riktig path
+     *  2) Vi skal hente ut fødselsnummeret slik at vi kan slå opp i personregisteret
+     *  3) Metoden returnerer objektet Person som allerede er definert.
+     *  4) Hvis personen ikke finnes i registeret, returner null.
+     *
+     * @param fnr er fødselsnummeret som er oppgitt i requesten.
+     * @return Person hvis person finnes, ellers null
+     *
+     *  Sitter du fast kan du hente inspirasjon fra
+     *  @see KjøretøyMockKontroller eller løsningsforslaget i filen PersonMockKontrollerLøsningsforslag.txt i samme mappe
+     */
+
 }

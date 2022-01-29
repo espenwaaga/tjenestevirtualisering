@@ -7,7 +7,7 @@ import no.soprasteria.vtp.register.Kjøretøyregister;
 import no.soprasteria.vtp.register.Personregister;
 
 @Configuration
-public class RegisterConfiguration {
+public class RegisterKonfigurasjon {
 
     @Bean
     public Kjøretøyregister kjøretøyregister() {

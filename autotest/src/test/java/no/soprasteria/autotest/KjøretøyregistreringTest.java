@@ -7,14 +7,16 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import no.soprasteria.autotest.klienter.BomsystemKlient;
-import no.soprasteria.autotest.klienter.VtpKlient;
+import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpKlient;
+import no.soprasteria.autotest.klienter.bomsystemet.KravKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
 
 class KjøretøyregistreringTest {
 
     private VtpKlient vtpKlient = new VtpKlient();
-    private final BomsystemKlient bomsystemKlient = new BomsystemKlient();
+    private final BomregistreringsKlient bomsystemKlient = new BomregistreringsKlient();
+    private final KravKlient kravKlientKlient = new KravKlient();
 
     @Test
     void testKjøretøyregisterring() {
@@ -31,7 +33,7 @@ class KjøretøyregistreringTest {
         bomsystemKlient.registererKjøretøy(forbipassering3);
         bomsystemKlient.registererKjøretøy(forbipassering4);
 
-        var krav = bomsystemKlient.hentAlleKravPåPerson(kjøretøy.kjøretøyInfo().eier().fnr());
+        var krav = kravKlientKlient.hentAlleKravPåPerson(kjøretøy.kjøretøyInfo().eier().fnr());
         assertThat(krav.size()).isEqualTo(2);
 
     }

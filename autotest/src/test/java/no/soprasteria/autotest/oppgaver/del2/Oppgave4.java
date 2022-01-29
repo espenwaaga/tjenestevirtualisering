@@ -1,39 +1,35 @@
 package no.soprasteria.autotest.oppgaver.del2;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
 import no.soprasteria.autotest.generator.ForbipasseringGenerator;
-import no.soprasteria.autotest.klienter.BomsystemKlient;
-import no.soprasteria.autotest.klienter.VtpKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpKlient;
+import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
+import no.soprasteria.autotest.klienter.bomsystemet.KravKlient;
 
 class Oppgave4 {
-    private static final Logger LOG = LoggerFactory.getLogger(BomsystemKlient.class);
-    private static final String FORVENTET_EXCEPTION_MESSAGE = "java.net.UnknownHostException: skatteetaten: nodename nor servname provided, or not known";
-    private static final HttpStatus FORVENTET_EXCEPTION_STATUS = HttpStatus.INTERNAL_SERVER_ERROR;
+    private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
 
-    private static final BomsystemKlient bomsystemKlient = new BomsystemKlient();
+    private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
+    private static final KravKlient kravKlient = new KravKlient();
     private static final VtpKlient vtpKlient = new VtpKlient();
 
     @Test
     void sendInnForbipssdasseringerTilBomsystem() {
         var testdata = vtpKlient.lagTestdata(1);
-        var registreringsnummer = testdata.kjøretøy().get(0).registreringsnummer();
+        var kjøretøy = testdata.kjøretøy().get(0);
+        var fødselsnummer = kjøretøy.kjøretøyInfo().eier().fnr();
+        var registreringsnummer = kjøretøy.registreringsnummer();
         var forbipassering = ForbipasseringGenerator.lagForbipassering(registreringsnummer);
+        var forbipasseringRegistrert = bomregistreringsKlient.registererKjøretøy(forbipassering);
+        assertThat(forbipasseringRegistrert).isTrue();
 
-        var exception = assertThrows(ResponseStatusException.class,
-                () -> bomsystemKlient.registererKjøretøy(forbipassering));
-        assertThat(exception.getMessage()).contains("java.net.UnknownHostException: skatteetaten: nodename nor servname provided, or not known");
-        assertThat(exception.getStatus()).isEqualTo(FORVENTET_EXCEPTION_STATUS);
-
-        LOG.info("Bra jobba! Nå er vi et steg nærmere!");
-        LOG.warn("Nå feiler registerering av forbipassering med \"{}: {}\"", FORVENTET_EXCEPTION_STATUS.value(), FORVENTET_EXCEPTION_MESSAGE);
-        LOG.warn("Vi skal løse dette i Oppgave 5!");
+        var krav = kravKlient.hentAlleKravPåPerson(fødselsnummer);
+        assertThat(krav).hasSize(1);
+        assertThat(krav.get(0).beregningsgrunnlag().forbipasseringer()).hasSize(1);
     }
 }

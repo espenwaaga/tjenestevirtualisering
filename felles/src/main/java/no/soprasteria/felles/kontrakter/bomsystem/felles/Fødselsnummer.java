@@ -13,4 +13,9 @@ public record Fødselsnummer(@JsonValue String value) {
     public String value() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }
