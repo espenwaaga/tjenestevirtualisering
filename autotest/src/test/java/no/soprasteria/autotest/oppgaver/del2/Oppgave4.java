@@ -20,15 +20,12 @@ class Oppgave4 {
 
     @Test
     void sendInnForbipssdasseringerTilBomsystem() {
-        var testdata = vtpKlient.lagTestdata(1);
-        var kjøretøy = testdata.kjøretøy().get(0);
-        var fødselsnummer = kjøretøy.kjøretøyInfo().eier().fnr();
-        var registreringsnummer = kjøretøy.registreringsnummer();
-        var forbipassering = ForbipasseringGenerator.lagForbipassering(registreringsnummer);
-        var forbipasseringRegistrert = bomregistreringsKlient.registererKjøretøy(forbipassering);
+        var testperson = vtpKlient.opprettTestperson();
+        var forbipassering = ForbipasseringGenerator.lagForbipassering(testperson.kjøretøy().registreringsnummer());
+        var forbipasseringRegistrert = bomregistreringsKlient.sendInnPassering(forbipassering);
         assertThat(forbipasseringRegistrert).isTrue();
 
-        var krav = kravKlient.hentAlleKravPåPerson(fødselsnummer);
+        var krav = kravKlient.hentAlleKravPåPerson(testperson.fnr());
         assertThat(krav).hasSize(1);
         assertThat(krav.get(0).beregningsgrunnlag().forbipasseringer()).hasSize(1);
     }

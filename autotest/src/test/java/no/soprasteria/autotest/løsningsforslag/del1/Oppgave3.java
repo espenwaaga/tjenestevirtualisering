@@ -1,4 +1,4 @@
-package no.soprasteria.autotest.oppgaver.del1;
+package no.soprasteria.autotest.løsningsforslag.del1;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,8 +26,8 @@ class Oppgave3 {
     @Test
     void sendInnForbipssdasseringerTilBomsystem() {
         // Generer testdata og bruk dette når du lager forbipasseringer.
-
-        Registreringsnummer registreringsnummer = null; // Sett dette til et gyldig registreringsnummer
+        var testperson = vtpKlient.opprettTestperson();
+        Registreringsnummer registreringsnummer = testperson.kjøretøy().registreringsnummer();
         var forbipassering = ForbipasseringGenerator.lagForbipassering(registreringsnummer);
         var forbipasseringRegistrert = bomregistreringsKlient.sendInnPassering(forbipassering);
         assertThat(forbipasseringRegistrert).isTrue();

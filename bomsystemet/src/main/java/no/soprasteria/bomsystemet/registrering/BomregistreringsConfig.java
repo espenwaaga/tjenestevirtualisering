@@ -8,13 +8,20 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 public class BomregistreringsConfig {
 
     private final boolean automatiskKrav;
+    private final boolean forbipasseringerIkkeKronologisk;
 
     @ConstructorBinding
-    public BomregistreringsConfig(@DefaultValue("false") boolean automatiskKrav) {
+    public BomregistreringsConfig(@DefaultValue("false") boolean automatiskKrav,
+                                  @DefaultValue("false") boolean forbipasseringerIkkeKronologisk) {
         this.automatiskKrav = automatiskKrav;
+        this.forbipasseringerIkkeKronologisk = forbipasseringerIkkeKronologisk;
     }
 
     public boolean skalOppretteKravAutomatisk() {
         return automatiskKrav;
+    }
+
+    public boolean erFixForforbipasseringerIkkeKronologiskAktivert() {
+        return forbipasseringerIkkeKronologisk;
     }
 }

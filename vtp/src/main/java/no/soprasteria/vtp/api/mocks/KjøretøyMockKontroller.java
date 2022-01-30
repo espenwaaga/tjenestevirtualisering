@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
 import no.soprasteria.felles.kontrakter.vtp.RegistreringsnummerList;
-import no.soprasteria.vtp.config.KontrollerKonfig;
 import no.soprasteria.vtp.register.Kjøretøyregister;
 
 @RestController()

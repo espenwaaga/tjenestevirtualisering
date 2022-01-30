@@ -27,6 +27,10 @@ public class Interceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        var requestURI = request.getRequestURI();
+        if (requestURI.contains("api/testdata") || requestURI.contains("api/teknisk")) {
+            return true;
+        }
         if (kontrolleKonfig.delaySkatteetaten() > 0 || kontrolleKonfig.delayVeivesenet() > 0) {
             LOG.info("Det er mottatt request mot {}", request.getRequestURI());
             LOG.warn("Det er lagt på {} sekunder delay. Venter...", kontrolleKonfig.delaySkatteetaten());

@@ -1,4 +1,6 @@
-package no.soprasteria.autotest.oppgaver.del3;
+package no.soprasteria.autotest.løsningsforslag.del3;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDateTime;
 
@@ -35,7 +37,18 @@ class Oppgave5 {
      */
     @Test
     void toForbipasseringerMedToTimersMellomromSkalOppretteToKrav() {
-        // Skriv test her
+        var testperson = vtpKlient.opprettTestperson();
+        var registreringsnummer = testperson.kjøretøy().registreringsnummer();
 
+        var forbipassering1 = ForbipasseringGenerator.lagForbipassering(registreringsnummer, LocalDateTime.now().minusHours(2));
+        var forbipassering2 = ForbipasseringGenerator.lagForbipassering(registreringsnummer, LocalDateTime.now().minusHours(1));
+
+        bomregistreringsKlient.sendInnPassering(forbipassering1);
+        bomregistreringsKlient.sendInnPassering(forbipassering2);
+
+        var krav = kravKlient.hentAlleKravPåPerson(testperson.fnr());
+        assertThat(krav).hasSize(2);
+        assertThat(krav.get(0).beregningsgrunnlag().forbipasseringer()).hasSize(1);
+        assertThat(krav.get(1).beregningsgrunnlag().forbipasseringer()).hasSize(1);
     }
 }

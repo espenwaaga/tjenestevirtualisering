@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
-import no.soprasteria.vtp.config.KontrollerKonfig;
 import no.soprasteria.vtp.register.Personregister;
 
 @RestController()
@@ -20,12 +19,10 @@ public class PersonMockKontrollerLøsningsforslag {
     private static final Logger LOG = LoggerFactory.getLogger(PersonMockKontrollerLøsningsforslag.class);
 
     private final Personregister personregister;
-    private final KontrollerKonfig kontrolleKonfig;
 
     @Autowired
-    public PersonMockKontrollerLøsningsforslag(Personregister personregister, KontrollerKonfig kontrolleKonfig) {
+    public PersonMockKontrollerLøsningsforslag(Personregister personregister) {
         this.personregister = personregister;
-        this.kontrolleKonfig = kontrolleKonfig;
     }
 
     @GetMapping(value = "/{fnr}")

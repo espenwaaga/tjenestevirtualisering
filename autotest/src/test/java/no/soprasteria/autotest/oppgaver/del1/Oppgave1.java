@@ -32,7 +32,7 @@ class Oppgave1 {
 //                .hasMessageContaining(FORVENTET_EXCEPTION_MESSAGE);
 
         var exception = assertThrows(ResponseStatusException.class,
-                () -> bomregistreringsKlient.registererKjøretøy(forbipassering));
+                () -> bomregistreringsKlient.sendInnPassering(forbipassering));
         assertThat(exception.getMessage()).contains(FORVENTET_EXCEPTION_MESSAGE);
         assertThat(exception.getStatus()).isEqualTo(FORVENTET_EXCEPTION_STATUS);
 

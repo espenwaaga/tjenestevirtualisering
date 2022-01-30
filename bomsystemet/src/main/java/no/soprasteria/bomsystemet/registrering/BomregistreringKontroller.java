@@ -45,11 +45,12 @@ public class BomregistreringKontroller {
         }
         leggForbipasseringIRegister(forbipassering);
 
-
-
-
         if (config.skalOppretteKravAutomatisk()) {
-            kravbehandler.opprettKravPåPassering(forbipassering);
+            if (config.erFixForforbipasseringerIkkeKronologiskAktivert()) {
+                kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering);
+            } else {
+                kravbehandler.opprettKravPåPassering(forbipassering);
+            }
         }
         return true;
     }

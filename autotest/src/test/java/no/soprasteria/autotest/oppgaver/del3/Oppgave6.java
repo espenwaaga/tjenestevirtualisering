@@ -19,22 +19,21 @@ import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
  * LocalDateTime kan du enkelt spesifiser absolutt tidspunkt slik -> LocalDateTime.of(2022, 02, 14, 2, 2, 2),
  * eller relativt tidspunkt -> LocalDateTime.now().minusHours(1)
  */
-class Oppgave5 {
+class Oppgave6 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
 
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
     private static final KravKlient kravKlient = new KravKlient();
     private static final VtpKlient vtpKlient = new VtpKlient();
 
-
     /**
-     * Oppgave 5: Vi skal nå teste at bilisten blir belastet for begge passeringene sine hvis det har gått over en time.
-     *  1) Generer to forbipasseringer for gitt kjøretøy (begge må være tilbake i tid og være over en 1 time forskjell)
+     * Oppgave 6: Vi skal nå teste at bilisten blir bare belastet en gang hvis begge passeringene er innenfor en time fra hverandre.
+     *  1) Generer to forbipasseringer for gitt kjøretøy (maksimalt en times forskjell)
      *  2) Send inn disse to forbipasseringene i kronologisk rekkefølge.
-     *  3) Verifiser at det blir opprettet to krav – en for hver passering.
+     *  3) Verifiser at det blir bare opprettet ett krav.
      */
     @Test
-    void toForbipasseringerMedToTimersMellomromSkalOppretteToKrav() {
+    void toEllerFlereForbipasseringerForInneværendeTimeSkalBareBelastesEnGang() {
         // Skriv test her
 
     }
