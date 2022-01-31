@@ -16,11 +16,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import no.soprasteria.bomsystemet.beregning.Beregning;
-import no.soprasteria.bomsystemet.config.JacksonConfiguration;
-import no.soprasteria.bomsystemet.config.RegisterConfiguration;
-import no.soprasteria.bomsystemet.database.Forbipasseringsregister;
-import no.soprasteria.bomsystemet.database.Kravregister;
-import no.soprasteria.bomsystemet.kravbehandling.KravKontroller;
+import no.soprasteria.bomsystemet.util.config.JacksonConfiguration;
+import no.soprasteria.bomsystemet.util.config.RegisterConfiguration;
+import no.soprasteria.bomsystemet.util.database.Forbipasseringsregister;
+import no.soprasteria.bomsystemet.util.database.Kravregister;
+import no.soprasteria.bomsystemet.innsyn.InnsynKontroller;
 import no.soprasteria.bomsystemet.kravbehandling.Kravbehandler;
 import no.soprasteria.bomsystemet.oppslag.kjøretøy.KjøretøyOppslagKlient;
 import no.soprasteria.bomsystemet.oppslag.person.PersonOppslagKlient;
@@ -51,7 +51,8 @@ class KravbehandlingTest {
     private Kravregister kravregister = new Kravregister();
     private Beregning beregning;
     private Kravbehandler kravbehandler;
-    private KravKontroller kravKontroller;
+    private InnsynKontroller innsynKontroller;
+
 
     @Mock
     private KjøretøyOppslagKlient kjøretøyOppslag;
@@ -68,7 +69,7 @@ class KravbehandlingTest {
         when(personOppslag.hentOpplysninger(any())).thenReturn(personInfo);
         beregning = new Beregning(forbipasseringsregister, kjøretøyOppslag);
         kravbehandler = new Kravbehandler(kjøretøyOppslag, personOppslag, beregning, kravregister);
-        kravKontroller = new KravKontroller(kravregister);
+        innsynKontroller = new InnsynKontroller(kravregister, null);
     }
 
 
@@ -84,7 +85,7 @@ class KravbehandlingTest {
         kravbehandler.opprettKravPåPassering(forbipassering1);
         kravbehandler.opprettKravPåPassering(forbipassering2);
         kravbehandler.opprettKravPåPassering(forbipassering3);
-        assertThat(kravKontroller.hentAlleKravPåPerson(fnr).size()).isEqualTo(2);
+        assertThat(innsynKontroller.hentAlleKravPåPerson(fnr).size()).isEqualTo(2);
     }
 
 
@@ -100,7 +101,7 @@ class KravbehandlingTest {
         kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering1);
         kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering2);
         kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering3);
-        assertThat(kravKontroller.hentAlleKravPåPerson(fnr).size()).isEqualTo(2);
+        assertThat(innsynKontroller.hentAlleKravPåPerson(fnr).size()).isEqualTo(2);
     }
 
 
@@ -117,7 +118,7 @@ class KravbehandlingTest {
         kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering3);
         kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering2);
         kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering1);
-        assertThat(kravKontroller.hentAlleKravPåPerson(fnr).size()).isEqualTo(2);
+        assertThat(innsynKontroller.hentAlleKravPåPerson(fnr).size()).isEqualTo(2);
     }
 
     private static Person personInfo() {

@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import no.soprasteria.bomsystemet.database.Forbipasseringsregister;
+import no.soprasteria.bomsystemet.util.database.Forbipasseringsregister;
 import no.soprasteria.bomsystemet.kravbehandling.Kravbehandler;
 import no.soprasteria.bomsystemet.oppslag.kjøretøy.KjøretøyOppslagKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipassering;
-import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.ForbipasseringList;
 
 @RestController()
 @RequestMapping(BomregistreringKontroller.MOTTAK_PATH)
@@ -46,23 +45,22 @@ public class BomregistreringKontroller {
         leggForbipasseringIRegister(forbipassering);
 
         if (config.skalOppretteKravAutomatisk()) {
-            if (config.erFixForforbipasseringerIkkeKronologiskAktivert()) {
-                kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering);
-            } else {
-                kravbehandler.opprettKravPåPassering(forbipassering);
-            }
+            opprettKrav(forbipassering);
         }
         return true;
-    }
-
-    @PostMapping(value = "/list")
-    public void registrerForbipassering(@RequestBody ForbipasseringList forbipasseringList) {
-        forbipasseringList.forbipasseringList().forEach(this::leggForbipasseringIRegister);
     }
 
     private void leggForbipasseringIRegister(Forbipassering forbipassering) {
         LOG.info("Registerer passering for {}", forbipassering.registreringsnummer());
         forbipasseringsregister.add(forbipassering.registreringsnummer(), forbipassering.forbipasseringsinformasjon());
         LOG.info("Registertet: {}", forbipasseringsregister);
+    }
+
+    private void opprettKrav(Forbipassering forbipassering) {
+        if (config.erFixForforbipasseringerIkkeKronologiskAktivert()) {
+            kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering);
+        } else {
+            kravbehandler.opprettKravPåPassering(forbipassering);
+        }
     }
 }

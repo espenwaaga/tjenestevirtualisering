@@ -21,11 +21,11 @@ public class ForbipasseringGenerator {
     }
 
     public static Forbipassering lagForbipassering(Registreringsnummer registreringsnummer, LocalDateTime tidspunkt) {
-        return lagForbipassering(registreringsnummer, lagForbipasseringInformasjon(tidspunkt, Sone.random()));
+        return lagForbipassering(registreringsnummer, lagForbipasseringInformasjon(tidspunkt, randomSone()));
     }
 
     public static Forbipassering lagForbipassering(Registreringsnummer registreringsnummer) {
-        return lagForbipassering(registreringsnummer, lagForbipasseringInformasjon(Sone.random()));
+        return lagForbipassering(registreringsnummer, lagForbipasseringInformasjon(randomSone()));
     }
 
     private static Forbipassering lagForbipassering(Registreringsnummer registreringsnummer, Forbipasseringsinformasjon forbipasseringsinformasjon) {
@@ -53,5 +53,10 @@ public class ForbipasseringGenerator {
         var maxDay = LocalDate.now().toEpochDay();
         var randomDay = RANDOM.nextLong(minDay, maxDay);
         return LocalDate.ofEpochDay(randomDay);
+    }
+
+    private static Sone randomSone() {
+        var alleSonene = List.of(Sone.values());
+        return alleSonene.get(RANDOM.nextInt(alleSonene.size()));
     }
 }

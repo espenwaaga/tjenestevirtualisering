@@ -15,7 +15,7 @@ import no.soprasteria.felles.kontrakter.vtp.Testpersoner;
 import no.soprasteria.felles.kontrakter.vtp.Testperson;
 import no.soprasteria.vtp.register.Kjøretøyregister;
 import no.soprasteria.vtp.register.Personregister;
-import no.soprasteria.vtp.testdataGenerator.TestdataGenerator;
+import no.soprasteria.vtp.util.testdata.TestdataGenerator;
 
 @RestController()
 @RequestMapping(TestdataKontroller.TESTDATA_PATH)

@@ -19,7 +19,10 @@ class Oppgave3 {
 
 
     /**
+     * Før dette forklar noe med VPT. Sikkert i pwoerpoint? Eller forklaring her? Begge plasser
+     *
      * Bruk VTP klienten til å opprette et kjøretøy i VTP.
+     * Heller si gå inn å se i VTPKLIENTEN.
      * Fra testdataen, hent kjøretøy og bruk dette registreringsnummeret ved innsenidng.
      *      HINT: vtpKlient.opprettTestperson()
      */

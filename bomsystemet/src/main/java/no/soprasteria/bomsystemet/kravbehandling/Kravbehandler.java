@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import no.soprasteria.bomsystemet.beregning.Beregning;
-import no.soprasteria.bomsystemet.database.Kravregister;
+import no.soprasteria.bomsystemet.util.database.Kravregister;
 import no.soprasteria.bomsystemet.oppslag.kjøretøy.KjøretøyOppslagKlient;
 import no.soprasteria.bomsystemet.oppslag.person.PersonOppslagKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;

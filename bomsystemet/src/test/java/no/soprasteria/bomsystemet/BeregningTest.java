@@ -16,8 +16,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import no.soprasteria.bomsystemet.beregning.Beregning;
-import no.soprasteria.bomsystemet.config.RegisterConfiguration;
-import no.soprasteria.bomsystemet.database.Forbipasseringsregister;
+import no.soprasteria.bomsystemet.util.config.RegisterConfiguration;
+import no.soprasteria.bomsystemet.util.database.Forbipasseringsregister;
 import no.soprasteria.bomsystemet.oppslag.kjøretøy.KjøretøyOppslagKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;

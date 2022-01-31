@@ -31,5 +31,7 @@ class Oppgave3 {
         var forbipassering = ForbipasseringGenerator.lagForbipassering(registreringsnummer);
         var forbipasseringRegistrert = bomregistreringsKlient.sendInnPassering(forbipassering);
         assertThat(forbipasseringRegistrert).isTrue();
+
+        // legg til verifisering at ...
     }
 }

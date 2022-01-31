@@ -9,13 +9,13 @@ import org.slf4j.LoggerFactory;
 import no.soprasteria.autotest.generator.ForbipasseringGenerator;
 import no.soprasteria.autotest.klienter.vtp.VtpKlient;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
-import no.soprasteria.autotest.klienter.bomsystemet.KravKlient;
+import no.soprasteria.autotest.klienter.bomsystemet.InnsynKlient;
 
 class Oppgave4 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
 
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
-    private static final KravKlient kravKlient = new KravKlient();
+    private static final InnsynKlient kravKlient = new InnsynKlient();
     private static final VtpKlient vtpKlient = new VtpKlient();
 
     @Test

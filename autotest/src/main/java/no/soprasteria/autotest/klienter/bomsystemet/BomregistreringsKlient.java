@@ -14,8 +14,7 @@ import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipassering;
 public class BomregistreringsKlient extends AbstractJerseyRestKlient {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
     private static final String BOMREGISTRERING_BASE_URL = "http://localhost:8080";
-    private static final String CONTEXT_PATH = "/api";
-    private static final String REGISTRER_FORBIPASSERING_PATH = CONTEXT_PATH + "/mottak";
+    private static final String REGISTRER_FORBIPASSERING_PATH = "/api/mottak";
 
     public boolean sendInnPassering(Forbipassering forbipassering) {
         LOG.info("Sender inn forbipassering med registereringsnummer {} til bomsystemet", forbipassering.registreringsnummer());

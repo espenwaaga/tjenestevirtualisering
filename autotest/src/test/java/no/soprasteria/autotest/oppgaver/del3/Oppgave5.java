@@ -1,5 +1,7 @@
 package no.soprasteria.autotest.oppgaver.del3;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
@@ -8,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import no.soprasteria.autotest.generator.ForbipasseringGenerator;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
-import no.soprasteria.autotest.klienter.bomsystemet.KravKlient;
+import no.soprasteria.autotest.klienter.bomsystemet.InnsynKlient;
 import no.soprasteria.autotest.klienter.vtp.VtpKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
@@ -21,9 +23,8 @@ import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
  */
 class Oppgave5 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
-
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
-    private static final KravKlient kravKlient = new KravKlient();
+    private static final InnsynKlient kravKlient = new InnsynKlient();
     private static final VtpKlient vtpKlient = new VtpKlient();
 
 

@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import no.soprasteria.felles.kontrakter.vtp.IkkeFunksjonelleKrav;
-import no.soprasteria.vtp.config.KontrollerKonfig;
+import no.soprasteria.vtp.util.config.KontrollerKonfig;
 
 @RestController()
 @RequestMapping(SimulerIkkeFunksjonelleKravKontroller.SIMULER_IKKE_FUNKSJONELLE_KRAV_PATH)
