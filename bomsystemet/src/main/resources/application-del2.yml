@@ -1,0 +1,9 @@
+oppslag:
+  kjoretoy:
+    base-url: http://localhost:8060
+  person:
+    #base-url: http://skatteetaten
+    base-url: http://localhost:8060
+bomregistrering:
+  automatisk-krav: true
+  forbipasseringer-ikke-kronologisk: false # Oppgave 8

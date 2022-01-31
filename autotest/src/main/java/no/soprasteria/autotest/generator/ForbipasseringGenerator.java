@@ -16,37 +16,32 @@ import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Kjøretøy;
 public class ForbipasseringGenerator {
     private static final Random RANDOM = new Random();
 
-
-    public static ForbipasseringList lagForbipassering(List<Kjøretøy> kjøretøyList) {
-        return new ForbipasseringList(kjøretøyList.stream()
-                .map(kjøretøy -> lagForbipassering(map(kjøretøy)))
-                .toList());
-    }
-    public static Forbipassering lagForbipassering(Registreringsnummer registreringsnummer,
-                                                   Sone sone) {
-        return new Forbipassering(registreringsnummer, lagForbipasseringInformasjon(sone));
+    public static Forbipassering lagForbipassering(Registreringsnummer registreringsnummer, Sone sone) {
+        return lagForbipassering(registreringsnummer, lagForbipasseringInformasjon(sone));
     }
 
-    public static Forbipassering lagForbipassering(LocalDateTime tidspunkt, Registreringsnummer registreringsnummer) {
-        return new Forbipassering(
-                registreringsnummer,
-                lagForbipasseringInformasjon(tidspunkt, Sone.random()));
+    public static Forbipassering lagForbipassering(Registreringsnummer registreringsnummer, LocalDateTime tidspunkt) {
+        return lagForbipassering(registreringsnummer, lagForbipasseringInformasjon(tidspunkt, randomSone()));
+    }
+
+    public static Forbipassering lagForbipassering(Registreringsnummer registreringsnummer) {
+        return lagForbipassering(registreringsnummer, lagForbipasseringInformasjon(randomSone()));
+    }
+
+    private static Forbipassering lagForbipassering(Registreringsnummer registreringsnummer, Forbipasseringsinformasjon forbipasseringsinformasjon) {
+        if (registreringsnummer == null) {
+            throw new RuntimeException("Registreringsnummer kan ikke være null!");
+        }
+        return new Forbipassering(registreringsnummer, forbipasseringsinformasjon);
+    }
+
+    private static Forbipasseringsinformasjon lagForbipasseringInformasjon(Sone sone) {
+        return lagForbipasseringInformasjon(randomTidspunkt(), sone);
     }
 
     private static Forbipasseringsinformasjon lagForbipasseringInformasjon(LocalDateTime tidspunkt, Sone sone) {
         return new Forbipasseringsinformasjon(tidspunkt, sone);
     }
-
-    public static Forbipassering lagForbipassering(Registreringsnummer registreringsnummer) {
-        return new Forbipassering(
-                registreringsnummer,
-                lagForbipasseringInformasjon(Sone.random()));
-    }
-
-    private static Forbipasseringsinformasjon lagForbipasseringInformasjon(Sone sone) {
-        return new Forbipasseringsinformasjon(randomTidspunkt(), sone);
-    }
-
 
     private static LocalDateTime randomTidspunkt() {
         var randomDate = randomDato();
@@ -60,13 +55,8 @@ public class ForbipasseringGenerator {
         return LocalDate.ofEpochDay(randomDay);
     }
 
-    private static List<Registreringsnummer> mapKjøretøyList(List<Kjøretøy> kjøretøyList) {
-        return kjøretøyList.stream()
-                .map(ForbipasseringGenerator::map)
-                .toList();
-    }
-
-    private static Registreringsnummer map(Kjøretøy kjøretøy) {
-        return kjøretøy.registreringsnummer();
+    private static Sone randomSone() {
+        var alleSonene = List.of(Sone.values());
+        return alleSonene.get(RANDOM.nextInt(alleSonene.size()));
     }
 }

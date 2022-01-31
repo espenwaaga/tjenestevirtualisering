@@ -1,0 +1,10 @@
+oppslag:
+  kjoretoy:
+    base-url: http://localhost:8060
+
+## Erstatt linje 3 med http://localhost:8060 istedenfor.
+#   Fasit:
+# TODO....
+#   oppslag:
+#     kjoretoy:
+#       base-url: http://localhost:8060

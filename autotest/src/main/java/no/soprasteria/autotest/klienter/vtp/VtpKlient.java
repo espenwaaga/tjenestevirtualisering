@@ -1,52 +1,33 @@
 package no.soprasteria.autotest.klienter.vtp;
 
-import no.soprasteria.felles.http.AbstractJerseyRestKlient;
-import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
-import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
-import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
-import no.soprasteria.felles.kontrakter.vtp.RegistreringsnummerList;
-import no.soprasteria.felles.kontrakter.vtp.Testdata;
+import javax.ws.rs.client.Entity;
 
-import javax.ws.rs.core.MediaType;
+import no.soprasteria.felles.http.AbstractJerseyRestKlient;
+import no.soprasteria.felles.kontrakter.vtp.Testpersoner;
+import no.soprasteria.felles.kontrakter.vtp.Testperson;
 
 public class VtpKlient extends AbstractJerseyRestKlient {
-    private static final String CONTEXT_PATH = "/api";
     private static final String VTP_BASE_URI = "http://localhost:8060";
+    private static final String TESTPERSON_API_PATH = "/api/testdata";
+    private static final String OPPRETT_PERSON_PATH = TESTPERSON_API_PATH + "/person";
+    private static final String OPPRETT_PERSONER_PATH = TESTPERSON_API_PATH + "/personer";
 
 
-    private static final String VTP_KJØRETØY_PATH = CONTEXT_PATH + "/kjøretøy";
-    private static final String VTP_TESTDATA_PATH = CONTEXT_PATH + "/testdata";
-
-
-    public KjøretøyInfo hentKjøretøyInfo(Registreringsnummer registreringsnummer) {
-        return client.target(VTP_BASE_URI)
-                .path(VTP_KJØRETØY_PATH + "/" + registreringsnummer.value())
-                .request(MediaType.APPLICATION_JSON_TYPE)
-                .get(KjøretøyInfo.class);
-
+    public Testperson opprettTestperson() {
+        return opprettTestperson(1);
     }
 
-    public Testdata lagKjøretøy(KjøretøyKlasse kjøretøyKlasse) {
+    public Testperson opprettTestperson(int medAntallRegistrerteKjøretøy) {
         return client.target(VTP_BASE_URI)
-                .path(VTP_TESTDATA_PATH +
-                        "/kjøretøy" +
-                        "/" + kjøretøyKlasse)
+                .path(OPPRETT_PERSON_PATH)
                 .request()
-                .get(Testdata.class);
+                .post(Entity.json(medAntallRegistrerteKjøretøy), Testperson.class);
     }
 
-    public Testdata lagTestdata(int antallKjøretøy) {
+    public Testpersoner opprettTestpersoner(int antallPersoner) {
         return client.target(VTP_BASE_URI)
-                .path(VTP_TESTDATA_PATH + "/" + antallKjøretøy)
+                .path(OPPRETT_PERSONER_PATH)
                 .request()
-                .get(Testdata.class);
-    }
-
-    public RegistreringsnummerList hentKjøretøy() {
-        return client.target(VTP_BASE_URI)
-                .path(VTP_KJØRETØY_PATH)
-                .request(MediaType.APPLICATION_JSON_TYPE)
-                .get(RegistreringsnummerList.class);
-
+                .post(Entity.json(antallPersoner), Testpersoner.class);
     }
 }

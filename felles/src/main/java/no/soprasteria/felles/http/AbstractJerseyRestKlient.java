@@ -4,9 +4,6 @@ import static no.soprasteria.felles.http.JacksonObjectMapper.mapper;
 import static no.soprasteria.felles.http.RestClientSupportProdusent.connectionManager;
 import static no.soprasteria.felles.http.RestClientSupportProdusent.createKeepAliveStrategy;
 import static no.soprasteria.felles.http.RestClientSupportProdusent.defaultRequestConfig;
-import static org.glassfish.jersey.client.ClientProperties.REQUEST_ENTITY_PROCESSING;
-import static org.glassfish.jersey.client.RequestEntityProcessing.BUFFERED;
-import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 
 import java.util.Optional;
 
