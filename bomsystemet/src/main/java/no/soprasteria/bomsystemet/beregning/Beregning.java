@@ -2,30 +2,30 @@ package no.soprasteria.bomsystemet.beregning;
 
 import org.springframework.stereotype.Component;
 
-import no.soprasteria.bomsystemet.util.database.Forbipasseringsregister;
-import no.soprasteria.bomsystemet.oppslag.kjøretøy.KjøretøyOppslagKlient;
+import no.soprasteria.bomsystemet.util.database.Bompasseringsregister;
+import no.soprasteria.bomsystemet.oppslag.KjøretøyOppslagKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
-import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Sone;
+import no.soprasteria.felles.kontrakter.bomsystem.bompassering.Sone;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
 import no.soprasteria.felles.kontrakter.bomsystem.krav.Grunnlag;
 
 @Component
 public class Beregning {
-    private final Forbipasseringsregister forbipasseringsregister;
+    private final Bompasseringsregister bompasseringsregister;
     private final KjøretøyOppslagKlient oppslag;
 
-    public Beregning(Forbipasseringsregister forbipasseringsregister, KjøretøyOppslagKlient oppslag) {
-        this.forbipasseringsregister = forbipasseringsregister;
+    public Beregning(Bompasseringsregister bompasseringsregister, KjøretøyOppslagKlient oppslag) {
+        this.bompasseringsregister = bompasseringsregister;
         this.oppslag = oppslag;
     }
 
     public int beregnVeiavgift(Registreringsnummer registreringsnummer) {
-        var forbipasseringer = forbipasseringsregister.get(registreringsnummer);
+        var bompasseringer = bompasseringsregister.get(registreringsnummer);
         var kjøretøyInfo = oppslag.hentInformasjonOmKjøretøy(registreringsnummer).kjøretøyKlasse();
 
         int avgift = 0;
-        for (var forbipassering : forbipasseringer) {
-            var sats = hentSats(forbipassering.sone(), kjøretøyInfo);
+        for (var bompassering : bompasseringer) {
+            var sats = hentSats(bompassering.sone(), kjøretøyInfo);
             avgift += sats; // TODO: Legg til sats bare hvis det har gått mer enn 1 time siden sist passering
         }
 
@@ -33,8 +33,8 @@ public class Beregning {
     }
 
     public int beregnVeiavgift(Grunnlag beregningsgrunnlag) {
-        var registreringsnummer = beregningsgrunnlag.forbipasseringer().get(0).registreringsnummer();
-        var sone = beregningsgrunnlag.forbipasseringer().get(0).forbipasseringsinformasjon().sone();
+        var registreringsnummer = beregningsgrunnlag.bompasseringer().get(0).registreringsnummer();
+        var sone = beregningsgrunnlag.bompasseringer().get(0).bompasseringsinformasjon().sone();
 
         var kjøretøyKlasse = oppslag.hentInformasjonOmKjøretøy(registreringsnummer).kjøretøyKlasse();
         return hentSats(sone, kjøretøyKlasse);

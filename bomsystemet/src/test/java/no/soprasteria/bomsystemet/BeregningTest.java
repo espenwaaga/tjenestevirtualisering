@@ -17,12 +17,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import no.soprasteria.bomsystemet.beregning.Beregning;
 import no.soprasteria.bomsystemet.util.config.RegisterConfiguration;
-import no.soprasteria.bomsystemet.util.database.Forbipasseringsregister;
-import no.soprasteria.bomsystemet.oppslag.kjøretøy.KjøretøyOppslagKlient;
+import no.soprasteria.bomsystemet.util.database.Bompasseringsregister;
+import no.soprasteria.bomsystemet.oppslag.KjøretøyOppslagKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
-import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipasseringsinformasjon;
-import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Sone;
+import no.soprasteria.felles.kontrakter.bomsystem.bompassering.Bompasseringsinformasjon;
+import no.soprasteria.felles.kontrakter.bomsystem.bompassering.Sone;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Eier;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
@@ -33,7 +33,7 @@ import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
 class BeregningTest {
 
     @Autowired
-    private Forbipasseringsregister forbipasseringsregister;
+    private Bompasseringsregister bompasseringsregister;
     @Mock
     private KjøretøyOppslagKlient oppslag;
     private Beregning beregning;
@@ -44,7 +44,7 @@ class BeregningTest {
     @BeforeEach
     public void førAlleTester() {
         when(oppslag.hentInformasjonOmKjøretøy(any())).thenReturn(kjøretøyInfo);
-        beregning = new Beregning(forbipasseringsregister, oppslag);
+        beregning = new Beregning(bompasseringsregister, oppslag);
     }
 
     @Test
@@ -56,12 +56,12 @@ class BeregningTest {
     @Test
     void forventerAvgiftVedEnPassering() {
         var registerringsnummer = new Registreringsnummer("SV242526");
-        forbipasseringsregister.add(registerringsnummer, new Forbipasseringsinformasjon(LocalDateTime.now(), Sone.SONE1));
+        bompasseringsregister.add(registerringsnummer, new Bompasseringsinformasjon(LocalDateTime.now(), Sone.SONE1));
         var avgift = beregning.beregnVeiavgift(registerringsnummer);
         assertThat(avgift).isEqualTo(24);
 
-        forbipasseringsregister.remove(registerringsnummer);
-        assertThat(forbipasseringsregister.get(registerringsnummer).size()).isZero();
+        bompasseringsregister.remove(registerringsnummer);
+        assertThat(bompasseringsregister.get(registerringsnummer).size()).isZero();
     }
 
 
@@ -69,12 +69,12 @@ class BeregningTest {
     @Test
     void forventerAvgiftForBeggePasseringene() {
         var registerringsnummer = new Registreringsnummer("SV242526");
-        forbipasseringsregister.add(registerringsnummer, new Forbipasseringsinformasjon(LocalDateTime.now(), Sone.SONE1));
-        forbipasseringsregister.add(registerringsnummer, new Forbipasseringsinformasjon(LocalDateTime.now().minusDays(1), Sone.SONE1));
+        bompasseringsregister.add(registerringsnummer, new Bompasseringsinformasjon(LocalDateTime.now(), Sone.SONE1));
+        bompasseringsregister.add(registerringsnummer, new Bompasseringsinformasjon(LocalDateTime.now().minusDays(1), Sone.SONE1));
         var avgift = beregning.beregnVeiavgift(registerringsnummer);
         assertThat(avgift).isEqualTo(48);
-        forbipasseringsregister.remove(registerringsnummer);
-        assertThat(forbipasseringsregister.get(registerringsnummer).size()).isZero();
+        bompasseringsregister.remove(registerringsnummer);
+        assertThat(bompasseringsregister.get(registerringsnummer).size()).isZero();
     }
 
     private static KjøretøyInfo kjøretøyInfo() {

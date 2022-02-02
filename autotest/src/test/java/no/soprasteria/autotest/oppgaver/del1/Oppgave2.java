@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import no.soprasteria.autotest.generator.ForbipasseringGenerator;
+import no.soprasteria.autotest.generator.BompasseringGenerator;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
@@ -21,18 +21,22 @@ class Oppgave2 {
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
 
     @Test
-    void sendInnForbipasseringerTilBomsystem() {
+    void sendInnBompasseringerTilBomsystem() {
         var randomRegistereringsnummer = new Registreringsnummer("SV12345");
-        var forbipassering = ForbipasseringGenerator.lagForbipassering(randomRegistereringsnummer);
+        var bompassering = BompasseringGenerator.lagBompassering(randomRegistereringsnummer);
 
-        // TODO: Kanskje litt vanskelig?
+        // Verifiserer at kallet hive en forventet exception
         var exception = assertThrows(ResponseStatusException.class,
-                () -> bomregistreringsKlient.sendInnPassering(forbipassering));
-        assertThat(exception.getMessage()).contains(FORVENTET_EXCEPTION_MESSAGE);
-        assertThat(exception.getStatus()).isEqualTo(FORVENTET_EXCEPTION_STATUS);
+                () -> bomregistreringsKlient.sendInnPassering(bompassering));
+        assertThat(exception.getMessage())
+                .as("Feilmelding til Exception")
+                .contains(FORVENTET_EXCEPTION_MESSAGE);
+        assertThat(exception.getStatus())
+                .as("Status kode til Exception")
+                .isEqualTo(FORVENTET_EXCEPTION_STATUS);
 
         LOG.info("Bra jobba! Nå er vi et steg nærmere!");
-        LOG.warn("Nå feiler registerering av forbipassering med \"{}: {}\"", FORVENTET_EXCEPTION_STATUS.value(), FORVENTET_EXCEPTION_MESSAGE);
+        LOG.warn("Nå feiler registerering av bompassering med \"{}: {}\"", FORVENTET_EXCEPTION_STATUS.value(), FORVENTET_EXCEPTION_MESSAGE);
         LOG.warn("Vi skal løse dette i Oppgave 3!");
     }
 

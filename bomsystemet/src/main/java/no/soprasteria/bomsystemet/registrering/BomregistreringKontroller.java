@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import no.soprasteria.bomsystemet.util.database.Forbipasseringsregister;
+import no.soprasteria.bomsystemet.util.database.Bompasseringsregister;
 import no.soprasteria.bomsystemet.kravbehandling.Kravbehandler;
-import no.soprasteria.bomsystemet.oppslag.kjøretøy.KjøretøyOppslagKlient;
-import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipassering;
+import no.soprasteria.bomsystemet.oppslag.KjøretøyOppslagKlient;
+import no.soprasteria.felles.kontrakter.bomsystem.bompassering.Bompassering;
 
 @RestController()
 @RequestMapping(BomregistreringKontroller.MOTTAK_PATH)
@@ -23,44 +23,44 @@ public class BomregistreringKontroller {
 
     private final BomregistreringsConfig config;
     private final KjøretøyOppslagKlient kjøretøyOppslag;
-    private final Forbipasseringsregister forbipasseringsregister;
+    private final Bompasseringsregister bompasseringsregister;
     private final Kravbehandler kravbehandler;
 
     @Autowired
     public BomregistreringKontroller(BomregistreringsConfig config,
                                      KjøretøyOppslagKlient kjøretøyOppslag,
-                                     Forbipasseringsregister forbipasseringsregister,
+                                     Bompasseringsregister bompasseringsregister,
                                      Kravbehandler kravbehandler) {
         this.config = config;
         this.kjøretøyOppslag = kjøretøyOppslag;
-        this.forbipasseringsregister = forbipasseringsregister;
+        this.bompasseringsregister = bompasseringsregister;
         this.kravbehandler = kravbehandler;
     }
 
     @PostMapping
-    public Boolean registrerForbipassering(@RequestBody Forbipassering forbipassering) {
-        if (!kjøretøyOppslag.finnesKjøretøyIRegister(forbipassering.registreringsnummer())) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, forbipassering.registreringsnummer().value() + " finnes ikke i kjøretøyregisteret!");
+    public Boolean registrerBompassering(@RequestBody Bompassering bompassering) {
+        if (!kjøretøyOppslag.finnesKjøretøyIRegister(bompassering.registreringsnummer())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, bompassering.registreringsnummer().value() + " finnes ikke i kjøretøyregisteret!");
         }
-        leggForbipasseringIRegister(forbipassering);
+        leggBompasseringIRegister(bompassering);
 
         if (config.skalOppretteKravAutomatisk()) {
-            opprettKrav(forbipassering);
+            opprettKrav(bompassering);
         }
         return true;
     }
 
-    private void leggForbipasseringIRegister(Forbipassering forbipassering) {
-        LOG.info("Registerer passering for {}", forbipassering.registreringsnummer());
-        forbipasseringsregister.add(forbipassering.registreringsnummer(), forbipassering.forbipasseringsinformasjon());
-        LOG.info("Registertet: {}", forbipasseringsregister);
+    private void leggBompasseringIRegister(Bompassering bompassering) {
+        LOG.info("Registerer passering for {}", bompassering.registreringsnummer());
+        bompasseringsregister.add(bompassering.registreringsnummer(), bompassering.bompasseringsinformasjon());
+        LOG.info("Registertet: {}", bompasseringsregister);
     }
 
-    private void opprettKrav(Forbipassering forbipassering) {
-        if (config.erFixForforbipasseringerIkkeKronologiskAktivert()) {
-            kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering);
+    private void opprettKrav(Bompassering bompassering) {
+        if (config.erFixForBompasseringerIkkeKronologiskAktivert()) {
+            kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(bompassering);
         } else {
-            kravbehandler.opprettKravPåPassering(forbipassering);
+            kravbehandler.opprettKravPåPassering(bompassering);
         }
     }
 }

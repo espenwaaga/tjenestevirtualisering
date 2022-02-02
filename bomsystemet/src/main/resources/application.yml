@@ -3,3 +3,6 @@ server:
     context-path: /api
   error:
     include-message: always
+spring:
+  profiles:
+    active: del1

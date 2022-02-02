@@ -1,4 +1,4 @@
-package no.soprasteria.felles.kontrakter.bomsystem.forbipassering;
+package no.soprasteria.felles.kontrakter.bomsystem.bompassering;
 
 import java.util.List;
 import java.util.Random;

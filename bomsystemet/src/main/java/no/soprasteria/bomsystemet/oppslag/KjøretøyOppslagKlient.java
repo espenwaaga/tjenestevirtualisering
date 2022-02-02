@@ -1,4 +1,4 @@
-package no.soprasteria.bomsystemet.oppslag.kjøretøy;
+package no.soprasteria.bomsystemet.oppslag;
 
 import java.net.URI;
 

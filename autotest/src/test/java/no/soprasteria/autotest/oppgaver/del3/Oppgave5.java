@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import no.soprasteria.autotest.generator.ForbipasseringGenerator;
+import no.soprasteria.autotest.generator.BompasseringGenerator;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
 import no.soprasteria.autotest.klienter.bomsystemet.InnsynKlient;
 import no.soprasteria.autotest.klienter.vtp.VtpKlient;
@@ -16,8 +16,8 @@ import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
 
 /**
- * Legg merke til at ForbipasseringGenerator også har en metode for å spesifisere tidspunkt
- * {@link ForbipasseringGenerator#lagForbipassering(Registreringsnummer, LocalDateTime)}
+ * Legg merke til at BompasseringGenerator også har en metode for å spesifisere tidspunkt
+ * {@link BompasseringGenerator#lagBompassering(Registreringsnummer, LocalDateTime)}
  * LocalDateTime kan du enkelt spesifiser absolutt tidspunkt slik -> LocalDateTime.of(2022, 02, 14, 2, 2, 2),
  * eller relativt tidspunkt -> LocalDateTime.now().minusHours(1)
  */
@@ -30,12 +30,12 @@ class Oppgave5 {
 
     /**
      * Oppgave 5: Vi skal nå teste at bilisten blir belastet for begge passeringene sine hvis det har gått over en time.
-     *  1) Generer to forbipasseringer for gitt kjøretøy (begge må være tilbake i tid og være over en 1 time forskjell)
-     *  2) Send inn disse to forbipasseringene i kronologisk rekkefølge.
+     *  1) Generer to bompasseringer for gitt kjøretøy (begge må være tilbake i tid og være over en 1 time forskjell)
+     *  2) Send inn disse to bompasseringene i kronologisk rekkefølge.
      *  3) Verifiser at det blir opprettet to krav – en for hver passering.
      */
     @Test
-    void toForbipasseringerMedToTimersMellomromSkalOppretteToKrav() {
+    void toBompasseringerMedToTimersMellomromSkalOppretteToKrav() {
         // Skriv test her
 
     }

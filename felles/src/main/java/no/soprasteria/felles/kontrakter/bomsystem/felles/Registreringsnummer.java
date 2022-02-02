@@ -12,7 +12,6 @@ public record Registreringsnummer(@JsonValue String value) {
     @Valid
     @Max(value = 7)
     public Registreringsnummer {
-        //TODO: Legg til validering av Registeringsnummer
     }
 
     @Override

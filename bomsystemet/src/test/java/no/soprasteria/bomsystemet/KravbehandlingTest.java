@@ -18,17 +18,17 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import no.soprasteria.bomsystemet.beregning.Beregning;
 import no.soprasteria.bomsystemet.util.config.JacksonConfiguration;
 import no.soprasteria.bomsystemet.util.config.RegisterConfiguration;
-import no.soprasteria.bomsystemet.util.database.Forbipasseringsregister;
+import no.soprasteria.bomsystemet.util.database.Bompasseringsregister;
 import no.soprasteria.bomsystemet.util.database.Kravregister;
 import no.soprasteria.bomsystemet.innsyn.InnsynKontroller;
 import no.soprasteria.bomsystemet.kravbehandling.Kravbehandler;
-import no.soprasteria.bomsystemet.oppslag.kjøretøy.KjøretøyOppslagKlient;
-import no.soprasteria.bomsystemet.oppslag.person.PersonOppslagKlient;
+import no.soprasteria.bomsystemet.oppslag.KjøretøyOppslagKlient;
+import no.soprasteria.bomsystemet.oppslag.PersonOppslagKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
-import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipassering;
-import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipasseringsinformasjon;
-import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Sone;
+import no.soprasteria.felles.kontrakter.bomsystem.bompassering.Bompassering;
+import no.soprasteria.felles.kontrakter.bomsystem.bompassering.Bompasseringsinformasjon;
+import no.soprasteria.felles.kontrakter.bomsystem.bompassering.Sone;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.Eier;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
 import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyKlasse;
@@ -47,7 +47,7 @@ class KravbehandlingTest {
     private static final Fødselsnummer fnr = new Fødselsnummer("33333344444");
 
     @Autowired
-    private Forbipasseringsregister forbipasseringsregister;
+    private Bompasseringsregister bompasseringsregister;
     private Kravregister kravregister = new Kravregister();
     private Beregning beregning;
     private Kravbehandler kravbehandler;
@@ -67,7 +67,7 @@ class KravbehandlingTest {
     public void førAlleTester() {
         when(kjøretøyOppslag.hentInformasjonOmKjøretøy(any())).thenReturn(kjøretøyInfo);
         when(personOppslag.hentOpplysninger(any())).thenReturn(personInfo);
-        beregning = new Beregning(forbipasseringsregister, kjøretøyOppslag);
+        beregning = new Beregning(bompasseringsregister, kjøretøyOppslag);
         kravbehandler = new Kravbehandler(kjøretøyOppslag, personOppslag, beregning, kravregister);
         innsynKontroller = new InnsynKontroller(kravregister, null);
     }
@@ -75,32 +75,32 @@ class KravbehandlingTest {
 
     @Test
     void verifiserKorrektAntallKravOpprettesForForenkletMetode() {
-        var forbipassering1 = new Forbipassering(new Registreringsnummer("SV123123"),
-                new Forbipasseringsinformasjon(LocalDateTime.now().minusHours(4), Sone.SONE1));
-        var forbipassering2 = new Forbipassering(new Registreringsnummer("SV123123"),
-                new Forbipasseringsinformasjon(LocalDateTime.now().minusHours(3).minusMinutes(30), Sone.SONE1));
-        var forbipassering3 = new Forbipassering(new Registreringsnummer("SV123123"),
-                new Forbipasseringsinformasjon(LocalDateTime.now().minusHours(2).minusMinutes(45), Sone.SONE1));
+        var bompassering1 = new Bompassering(new Registreringsnummer("SV123123"),
+                new Bompasseringsinformasjon(LocalDateTime.now().minusHours(4), Sone.SONE1));
+        var bompassering2 = new Bompassering(new Registreringsnummer("SV123123"),
+                new Bompasseringsinformasjon(LocalDateTime.now().minusHours(3).minusMinutes(30), Sone.SONE1));
+        var bompassering3 = new Bompassering(new Registreringsnummer("SV123123"),
+                new Bompasseringsinformasjon(LocalDateTime.now().minusHours(2).minusMinutes(45), Sone.SONE1));
         // Kronologisk
-        kravbehandler.opprettKravPåPassering(forbipassering1);
-        kravbehandler.opprettKravPåPassering(forbipassering2);
-        kravbehandler.opprettKravPåPassering(forbipassering3);
+        kravbehandler.opprettKravPåPassering(bompassering1);
+        kravbehandler.opprettKravPåPassering(bompassering2);
+        kravbehandler.opprettKravPåPassering(bompassering3);
         assertThat(innsynKontroller.hentAlleKravPåPerson(fnr).size()).isEqualTo(2);
     }
 
 
     @Test
     void verifiserKorrektAntallKravOpprettesForopprettKravPåPasseringMedSafeGuardForForsinketRegistreringKronologisk() {
-        var forbipassering1 = new Forbipassering(new Registreringsnummer("SV123123"),
-                new Forbipasseringsinformasjon(LocalDateTime.now().minusHours(4), Sone.SONE1));
-        var forbipassering2 = new Forbipassering(new Registreringsnummer("SV123123"),
-                new Forbipasseringsinformasjon(LocalDateTime.now().minusHours(3).minusMinutes(30), Sone.SONE1));
-        var forbipassering3 = new Forbipassering(new Registreringsnummer("SV123123"),
-                new Forbipasseringsinformasjon(LocalDateTime.now().minusHours(2).minusMinutes(45), Sone.SONE1));
+        var bompassering1 = new Bompassering(new Registreringsnummer("SV123123"),
+                new Bompasseringsinformasjon(LocalDateTime.now().minusHours(4), Sone.SONE1));
+        var bompassering2 = new Bompassering(new Registreringsnummer("SV123123"),
+                new Bompasseringsinformasjon(LocalDateTime.now().minusHours(3).minusMinutes(30), Sone.SONE1));
+        var bompassering3 = new Bompassering(new Registreringsnummer("SV123123"),
+                new Bompasseringsinformasjon(LocalDateTime.now().minusHours(2).minusMinutes(45), Sone.SONE1));
         // Kronologisk
-        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering1);
-        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering2);
-        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering3);
+        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(bompassering1);
+        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(bompassering2);
+        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(bompassering3);
         assertThat(innsynKontroller.hentAlleKravPåPerson(fnr).size()).isEqualTo(2);
     }
 
@@ -108,16 +108,16 @@ class KravbehandlingTest {
 
     @Test
     void verifiserKorrektAntallKravOpprettesForopprettKravPåPasseringMedSafeGuardForForsinketRegistreringIKKEKronologisk() {
-        var forbipassering1 = new Forbipassering(new Registreringsnummer("SV123123"),
-                new Forbipasseringsinformasjon(LocalDateTime.now().minusHours(4), Sone.SONE1));
-        var forbipassering2 = new Forbipassering(new Registreringsnummer("SV123123"),
-                new Forbipasseringsinformasjon(LocalDateTime.now().minusHours(3).minusMinutes(30), Sone.SONE1));
-        var forbipassering3 = new Forbipassering(new Registreringsnummer("SV123123"),
-                new Forbipasseringsinformasjon(LocalDateTime.now().minusHours(2).minusMinutes(45), Sone.SONE1));
+        var bompassering1 = new Bompassering(new Registreringsnummer("SV123123"),
+                new Bompasseringsinformasjon(LocalDateTime.now().minusHours(4), Sone.SONE1));
+        var bompassering2 = new Bompassering(new Registreringsnummer("SV123123"),
+                new Bompasseringsinformasjon(LocalDateTime.now().minusHours(3).minusMinutes(30), Sone.SONE1));
+        var bompassering3 = new Bompassering(new Registreringsnummer("SV123123"),
+                new Bompasseringsinformasjon(LocalDateTime.now().minusHours(2).minusMinutes(45), Sone.SONE1));
         // IKKE kronologisk!
-        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering3);
-        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering2);
-        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(forbipassering1);
+        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(bompassering3);
+        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(bompassering2);
+        kravbehandler.opprettKravPåPasseringMedSafeGuardForForsinketRegistrering(bompassering1);
         assertThat(innsynKontroller.hentAlleKravPåPerson(fnr).size()).isEqualTo(2);
     }
 

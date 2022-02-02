@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
-import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipassering;
-import no.soprasteria.felles.kontrakter.bomsystem.forbipassering.Forbipasseringsinformasjon;
+import no.soprasteria.felles.kontrakter.bomsystem.bompassering.Bompassering;
+import no.soprasteria.felles.kontrakter.bomsystem.bompassering.Bompasseringsinformasjon;
 import no.soprasteria.felles.kontrakter.bomsystem.krav.Krav;
 import no.soprasteria.felles.kontrakter.bomsystem.krav.Periode;
 
@@ -63,24 +63,24 @@ public class Kravregister {
         var nyttFastsattKrav = krav;
         while (konflikkrav != null) {
             // Fordel passeringer til korrekt krav
-            var forbipasseringerForGjeldendeKonflikt = konflikkrav.beregningsgrunnlag().forbipasseringer();
-            var forbipasseringerForGjeldendeKonfliktCopy = new ArrayList<>(forbipasseringerForGjeldendeKonflikt);
-            for (var forbipassering : forbipasseringerForGjeldendeKonfliktCopy) {
-                if (erPasseringInnenforKrav(forbipassering.forbipasseringsinformasjon().tidspunkt(), nyttFastsattKrav)) {
-                    nyttFastsattKrav.beregningsgrunnlag().forbipasseringer().add(forbipassering);
-                    forbipasseringerForGjeldendeKonflikt.remove(forbipassering);
+            var bompasseringerForGjeldendeKonflikt = konflikkrav.beregningsgrunnlag().bompasseringer();
+            var bompasseringerForGjeldendeKonfliktCopy = new ArrayList<>(bompasseringerForGjeldendeKonflikt);
+            for (var bompassering : bompasseringerForGjeldendeKonfliktCopy) {
+                if (erPasseringInnenforKrav(bompassering.bompasseringsinformasjon().tidspunkt(), nyttFastsattKrav)) {
+                    nyttFastsattKrav.beregningsgrunnlag().bompasseringer().add(bompassering);
+                    bompasseringerForGjeldendeKonflikt.remove(bompassering);
                 }
             }
 
-            if (forbipasseringerForGjeldendeKonflikt.isEmpty()) {
+            if (bompasseringerForGjeldendeKonflikt.isEmpty()) {
                 remove(fødselsnummer, konflikkrav);
                 konflikkrav = null;
             } else {
                 // Korriger gyldighetsperioden for kravet
-                var tidligstFraTidspunkt = forbipasseringerForGjeldendeKonflikt.stream()
-                        .map(Forbipassering::forbipasseringsinformasjon)
-                        .min(Comparator.comparing(Forbipasseringsinformasjon::tidspunkt))
-                        .map(Forbipasseringsinformasjon::tidspunkt)
+                var tidligstFraTidspunkt = bompasseringerForGjeldendeKonflikt.stream()
+                        .map(Bompassering::bompasseringsinformasjon)
+                        .min(Comparator.comparing(Bompasseringsinformasjon::tidspunkt))
+                        .map(Bompasseringsinformasjon::tidspunkt)
                         .orElseThrow();
                 konflikkrav.gyldighetsperiode().setFra(tidligstFraTidspunkt);
                 konflikkrav.gyldighetsperiode().setTom(tidligstFraTidspunkt.plusHours(1));

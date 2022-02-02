@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import no.soprasteria.autotest.generator.ForbipasseringGenerator;
+import no.soprasteria.autotest.generator.BompasseringGenerator;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
 import no.soprasteria.autotest.klienter.bomsystemet.InnsynKlient;
 import no.soprasteria.autotest.klienter.vtp.SimulerIkkeFunskjonelleKravKlient;
@@ -15,8 +15,8 @@ import no.soprasteria.autotest.klienter.vtp.VtpKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
 /**
- * Legg merke til at ForbipasseringGenerator også har en metode for å spesifisere tidspunkt
- * {@link ForbipasseringGenerator#lagForbipassering(Registreringsnummer, LocalDateTime)}
+ * Legg merke til at BompasseringGenerator også har en metode for å spesifisere tidspunkt
+ * {@link BompasseringGenerator#lagBompassering(Registreringsnummer, LocalDateTime)}
  * LocalDateTime kan du enkelt spesifiser absolutt tidspunkt slik -> LocalDateTime.of(2022, 02, 14, 2, 2, 2),
  * eller relativt tidspunkt -> LocalDateTime.now().minusHours(1)
  */
@@ -34,7 +34,7 @@ class Oppgave9 {
      * 'SimulerIkkeFunskjonelleKravKlient'.
      *
      *  1) Legg på delay på for eksempel 10 sekunder.
-     *  2) Send inn forbipasseringer og sjekk oppførselen til systemet
+     *  2) Send inn bompasseringer og sjekk oppførselen til systemet
      */
     @Test
     void delayHosVeivesenetOgSkatt() {

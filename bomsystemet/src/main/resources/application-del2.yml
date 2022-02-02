@@ -6,4 +6,4 @@ oppslag:
     base-url: http://localhost:8060
 bomregistrering:
   automatisk-krav: true
-  forbipasseringer-ikke-kronologisk: false # Oppgave 8
+  bompasseringer-ikke-kronologisk-fikset: true # Oppgave 8

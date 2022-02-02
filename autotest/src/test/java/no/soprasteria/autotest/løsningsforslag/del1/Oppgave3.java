@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import no.soprasteria.autotest.generator.ForbipasseringGenerator;
+import no.soprasteria.autotest.generator.BompasseringGenerator;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
 import no.soprasteria.autotest.klienter.vtp.VtpKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
@@ -25,12 +25,12 @@ class Oppgave3 {
      */
     @Test
     void sendInnForbipssdasseringerTilBomsystem() {
-        // Generer testdata og bruk dette når du lager forbipasseringer.
+        // Generer testdata og bruk dette når du lager bompasseringer.
         var testperson = vtpKlient.opprettTestperson();
         Registreringsnummer registreringsnummer = testperson.kjøretøy().registreringsnummer();
-        var forbipassering = ForbipasseringGenerator.lagForbipassering(registreringsnummer);
-        var forbipasseringRegistrert = bomregistreringsKlient.sendInnPassering(forbipassering);
-        assertThat(forbipasseringRegistrert).isTrue();
+        var bompassering = BompasseringGenerator.lagBompassering(registreringsnummer);
+        var bompasseringErRegistrert = bomregistreringsKlient.sendInnPassering(bompassering);
+        assertThat(bompasseringErRegistrert).isTrue();
 
         // legg til verifisering at ...
     }
