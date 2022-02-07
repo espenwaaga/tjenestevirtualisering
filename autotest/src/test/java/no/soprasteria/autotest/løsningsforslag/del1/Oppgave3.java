@@ -32,6 +32,6 @@ class Oppgave3 {
         var bompasseringErRegistrert = bomregistreringsKlient.sendInnPassering(bompassering);
         assertThat(bompasseringErRegistrert).isTrue();
 
-        // legg til verifisering at ...
+        // legg til andre verifiseringer?
     }
 }

@@ -28,7 +28,7 @@ class Oppgave1 {
         var randomRegistereringsnummer = new Registreringsnummer("SV12345");
         var bompassering = BompasseringGenerator.lagBompassering(randomRegistereringsnummer);
 
-        // Verifiserer at kallet hive en forventet exception
+        // Verifiserer at kallet hiver en forventet exception
         var exception = assertThrows(ResponseStatusException.class,
                 () -> bomregistreringsKlient.sendInnPassering(bompassering));
         assertThat(exception.getMessage())
