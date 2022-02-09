@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import no.soprasteria.autotest.generator.BompasseringGenerator;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
 import no.soprasteria.autotest.klienter.bomsystemet.InnsynKlient;
-import no.soprasteria.autotest.klienter.vtp.VtpKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpTestdataKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
 
@@ -25,7 +25,7 @@ class Oppgave5 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
     private static final InnsynKlient kravKlient = new InnsynKlient();
-    private static final VtpKlient vtpKlient = new VtpKlient();
+    private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
 
 
     /**

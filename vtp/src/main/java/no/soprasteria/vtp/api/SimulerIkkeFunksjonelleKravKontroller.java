@@ -26,7 +26,7 @@ public class SimulerIkkeFunksjonelleKravKontroller {
 
     @PostMapping
     public boolean simulerDelayForMockene(@RequestBody int delay) {
-        kontrolleKonfig.setDelayVeivesenet(delay);
+        kontrolleKonfig.setDelayVegvesen(delay);
         kontrolleKonfig.setDelaySkatteetaten(delay);
         LOG.info("Forsinkelsen på mockene er nå endret til {}", kontrolleKonfig);
         return true;
@@ -34,7 +34,7 @@ public class SimulerIkkeFunksjonelleKravKontroller {
 
     @PostMapping(path = "/reset")
     public boolean resetTilDefault() {
-        kontrolleKonfig.setDelayVeivesenet(DEFAULT_DELAY_MS);
+        kontrolleKonfig.setDelayVegvesen(DEFAULT_DELAY_MS);
         kontrolleKonfig.setDelaySkatteetaten(DEFAULT_DELAY_MS);
         LOG.info("Konfig for simulering av ikke-funksjonelle krav API er satt tilbake til default: {}", kontrolleKonfig);
         return true;

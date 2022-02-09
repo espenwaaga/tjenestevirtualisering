@@ -6,7 +6,7 @@ import no.soprasteria.felles.http.AbstractJerseyRestKlient;
 import no.soprasteria.felles.kontrakter.vtp.Testpersoner;
 import no.soprasteria.felles.kontrakter.vtp.Testperson;
 
-public class VtpKlient extends AbstractJerseyRestKlient {
+public class VtpTestdataKlient extends AbstractJerseyRestKlient {
     private static final String VTP_BASE_URI = "http://localhost:8060";
     private static final String TESTPERSON_API_PATH = "/api/testdata";
     private static final String OPPRETT_PERSON_PATH = TESTPERSON_API_PATH + "/person";

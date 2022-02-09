@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 import no.soprasteria.autotest.generator.BompasseringGenerator;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
 import no.soprasteria.autotest.klienter.bomsystemet.InnsynKlient;
-import no.soprasteria.autotest.klienter.vtp.SimulerIkkeFunskjonelleKravKlient;
-import no.soprasteria.autotest.klienter.vtp.VtpKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpSimulerIkkeFunskjonelleKravKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpTestdataKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
 /**
@@ -26,23 +26,23 @@ class Oppgave9 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
     private static final InnsynKlient kravKlient = new InnsynKlient();
-    private static final VtpKlient vtpKlient = new VtpKlient();
-    private static final SimulerIkkeFunskjonelleKravKlient simulerIkkeFunskjonelleKravKlient = new SimulerIkkeFunskjonelleKravKlient();
+    private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
+    private static final VtpSimulerIkkeFunskjonelleKravKlient vtpSimulerIkkeFunksjonlleKravKlient = new VtpSimulerIkkeFunskjonelleKravKlient();
 
 
     /**
-     * Oppgave 9: Nå skal vi sjekke hvordan systemet håndtere forsinkelser hos skattetaten og veivesenet. Vi skal nå
-     * legge på forsinkelse/delay på alle kall som går mot skattetaten og veivesenet. Dette kan gjøres med klienten
+     * Oppgave 9: Nå skal vi sjekke hvordan systemet håndtere forsinkelser hos skattetaten og vegvesenet. Vi skal nå
+     * legge på forsinkelse/delay på alle kall som går mot skattetaten og vegvesenet. Dette kan gjøres med klienten
      * 'SimulerIkkeFunskjonelleKravKlient'.
      *
      *  1) Legg på delay på for eksempel 10 sekunder.
      *  2) Send inn bompasseringer og sjekk oppførselen til systemet
      */
     @Test
-    void delayHosVeivesenetOgSkatt() {
-        simulerIkkeFunskjonelleKravKlient.leggPåDelay(10); // Legger på 10 sekunder delay på mockene.
+    void delayHosVegvesenetOgSkattetaten() {
+        vtpSimulerIkkeFunksjonlleKravKlient.leggPåDelay(10); // Legger på 10 sekunder delay på mockene.
 
-        var testperson = vtpKlient.opprettTestperson();
+        var testperson = vtpTestdataKlient.opprettTestperson();
         var registreringsnummer = testperson.kjøretøy().registreringsnummer();
 
         var bompassering1 = BompasseringGenerator.lagBompassering(registreringsnummer, LocalDateTime.now().minusHours(1).minusMinutes(20));
@@ -64,7 +64,7 @@ class Oppgave9 {
      */
     @AfterEach
     public void reset() {
-        simulerIkkeFunskjonelleKravKlient.reset();
+        vtpSimulerIkkeFunksjonlleKravKlient.reset();
     }
 
 }

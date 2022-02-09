@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import no.soprasteria.autotest.generator.BompasseringGenerator;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
 import no.soprasteria.autotest.klienter.bomsystemet.InnsynKlient;
-import no.soprasteria.autotest.klienter.vtp.VtpKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpTestdataKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
 
@@ -26,7 +26,7 @@ class Oppgave7 {
 
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
     private static final InnsynKlient kravKlient = new InnsynKlient();
-    private static final VtpKlient vtpKlient = new VtpKlient();
+    private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
 
     /**
      * Oppgave 7: Nå skal vi teste at en person ikke blir belastet for andres bompasseringer.
@@ -36,7 +36,7 @@ class Oppgave7 {
      */
     @Test
     void personeSkalBareBliBelastesForPasseringerForKjøretøySomErRegistrertPåSegSelv() {
-        var testperson1 = vtpKlient.opprettTestperson();
+        var testperson1 = vtpTestdataKlient.opprettTestperson();
         var bompassering1_1 = BompasseringGenerator.lagBompassering(testperson1.kjøretøy().registreringsnummer(), LocalDateTime.now().minusHours(2));
         bomregistreringsKlient.sendInnPassering(bompassering1_1);
         var opprinneligKrav = kravKlient.hentAlleKravPåPerson(testperson1.fnr());
@@ -44,14 +44,14 @@ class Oppgave7 {
 
 
         // Person2
-        var testperson2 = vtpKlient.opprettTestperson();
+        var testperson2 = vtpTestdataKlient.opprettTestperson();
         var bompasseringPerson2_1 = BompasseringGenerator.lagBompassering(testperson2.kjøretøy().registreringsnummer(), LocalDateTime.now().minusHours(3));
         var bompasseringPerson2_2 = BompasseringGenerator.lagBompassering(testperson2.kjøretøy().registreringsnummer(), LocalDateTime.now().minusHours(2).minusMinutes(4));
         bomregistreringsKlient.sendInnPassering(bompasseringPerson2_1);
         bomregistreringsKlient.sendInnPassering(bompasseringPerson2_2);
 
         // Person 3
-        var testperson3 = vtpKlient.opprettTestperson();
+        var testperson3 = vtpTestdataKlient.opprettTestperson();
         var bompasseringPerson3_1 = BompasseringGenerator.lagBompassering(testperson3.kjøretøy().registreringsnummer(), LocalDateTime.now().minusHours(2).minusSeconds(5));
         bomregistreringsKlient.sendInnPassering(bompasseringPerson3_1);
 

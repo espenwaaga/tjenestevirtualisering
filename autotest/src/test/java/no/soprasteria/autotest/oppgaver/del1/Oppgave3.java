@@ -8,22 +8,20 @@ import org.slf4j.LoggerFactory;
 
 import no.soprasteria.autotest.generator.BompasseringGenerator;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
-import no.soprasteria.autotest.klienter.vtp.VtpKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpTestdataKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
 class Oppgave3 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
 
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
-    private static final VtpKlient vtpKlient = new VtpKlient();
+    private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
 
 
     /**
-     * Før dette forklar noe med VPT. Sikkert i pwoerpoint? Eller forklaring her? Begge plasser
-     *
-     * Bruk VTP klienten til å opprette et kjøretøy i VTP.
-     * Heller si gå inn å se i VTPKLIENTEN.
-     * Fra testdataen, hent kjøretøy og bruk dette registreringsnummeret ved innsenidng.
+     * Bruk VTP klienten til å opprette et kjøretøy i VTP. Du vil deretter motta Testdata fra VTP.
+     * Fra testdataen, hent ut kjøretøy og registreringsnummeret forbunnet med dette kjøretøyet.
+     * Bruk dette registreringsnummeret ved oppretting av bompassering.
      *      HINT: vtpKlient.opprettTestperson()
      */
     @Test

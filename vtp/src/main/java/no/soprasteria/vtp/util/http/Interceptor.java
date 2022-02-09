@@ -31,7 +31,7 @@ public class Interceptor implements HandlerInterceptor {
         if (requestURI.contains("api/testdata") || requestURI.contains("api/teknisk")) {
             return true;
         }
-        if (kontrolleKonfig.delaySkatteetaten() > 0 || kontrolleKonfig.delayVeivesenet() > 0) {
+        if (kontrolleKonfig.delaySkatteetaten() > 0 || kontrolleKonfig.delayVegvesen() > 0) {
             LOG.info("Det er mottatt request mot {}", request.getRequestURI());
             LOG.warn("Det er lagt på {} sekunder delay. Venter...", kontrolleKonfig.delaySkatteetaten());
             TimeUnit.SECONDS.sleep(kontrolleKonfig.delaySkatteetaten());

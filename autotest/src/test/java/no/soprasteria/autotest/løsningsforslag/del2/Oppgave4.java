@@ -9,18 +9,18 @@ import org.slf4j.LoggerFactory;
 import no.soprasteria.autotest.generator.BompasseringGenerator;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
 import no.soprasteria.autotest.klienter.bomsystemet.InnsynKlient;
-import no.soprasteria.autotest.klienter.vtp.VtpKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpTestdataKlient;
 
 class Oppgave4 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
 
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
     private static final InnsynKlient innsynKlient = new InnsynKlient();
-    private static final VtpKlient vtpKlient = new VtpKlient();
+    private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
 
     @Test
     void sendInnForbipssdasseringerTilBomsystem() {
-        var testperson = vtpKlient.opprettTestperson();
+        var testperson = vtpTestdataKlient.opprettTestperson();
         var bompassering = BompasseringGenerator.lagBompassering(testperson.kjøretøy().registreringsnummer());
         var bompasseringErRegistrert = bomregistreringsKlient.sendInnPassering(bompassering);
         assertThat(bompasseringErRegistrert).isTrue();

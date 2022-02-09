@@ -1,20 +1,20 @@
 package no.soprasteria.vtp.util.config;
 
 public class KontrollerKonfig {
-    private int delayVeivesenet;
+    private int delayVegvesen;
     private int delaySkatteetaten;
 
-    public KontrollerKonfig(int delayVeivesenet, int delaySkatteetaten) {
-        this.delayVeivesenet = delayVeivesenet;
+    public KontrollerKonfig(int delayVegvesen, int delaySkatteetaten) {
+        this.delayVegvesen = delayVegvesen;
         this.delaySkatteetaten = delaySkatteetaten;
     }
 
-    public int delayVeivesenet() {
-        return delayVeivesenet;
+    public int delayVegvesen() {
+        return delayVegvesen;
     }
 
-    public void setDelayVeivesenet(int delayVeivesenet) {
-        this.delayVeivesenet = delayVeivesenet;
+    public void setDelayVegvesen(int delayVegvesen) {
+        this.delayVegvesen = delayVegvesen;
     }
 
     public int delaySkatteetaten() {
@@ -28,7 +28,7 @@ public class KontrollerKonfig {
     @Override
     public String toString() {
         return "KontrollerKonfig{" +
-                "delayVeivesenet=" + delayVeivesenet +
+                "delayVegvesen=" + delayVegvesen +
                 ", delaySkatteetaten=" + delaySkatteetaten +
                 '}';
     }

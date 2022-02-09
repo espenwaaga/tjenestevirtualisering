@@ -18,7 +18,7 @@ import no.soprasteria.felles.kontrakter.bomsystem.kjøretøy.KjøretøyInfo;
 public class KjøretøyOppslagKlient extends AbstractJerseyRestKlient {
 
     private static final Logger LOG = LoggerFactory.getLogger(KjøretøyOppslagKlient.class);
-    private static final String DEFAULT_BASE_URL = "http://veivesenet";
+    private static final String DEFAULT_BASE_URL = "http://vegvesen";
     private static final String DEFAULT_KJØRETØY_OPPSLAG_PATH = "/api/kjøretøy";
 
     private final URI baseUrl;

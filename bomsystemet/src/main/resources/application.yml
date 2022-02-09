@@ -5,4 +5,4 @@ server:
     include-message: always
 spring:
   profiles:
-    active: del1
+    active: del1  # Her kan du bytte mellom profil del1 eller del2. Husk å kjøre ned og opp bomsystemet!

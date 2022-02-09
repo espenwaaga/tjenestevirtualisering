@@ -1,5 +1,7 @@
 package no.soprasteria.autotest.oppgaver.del3;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
@@ -9,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import no.soprasteria.autotest.generator.BompasseringGenerator;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
 import no.soprasteria.autotest.klienter.bomsystemet.InnsynKlient;
-import no.soprasteria.autotest.klienter.vtp.VtpKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpTestdataKlient;
 import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
 
@@ -23,7 +25,7 @@ class Oppgave7 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
     private static final InnsynKlient kravKlient = new InnsynKlient();
-    private static final VtpKlient vtpKlient = new VtpKlient();
+    private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
 
     /**
      * Oppgave 7: Nå skal vi teste at en person ikke blir belastet for andres bompasseringer.

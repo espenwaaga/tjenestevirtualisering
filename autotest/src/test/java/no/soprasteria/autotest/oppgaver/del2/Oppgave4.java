@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import no.soprasteria.autotest.generator.BompasseringGenerator;
-import no.soprasteria.autotest.klienter.vtp.VtpKlient;
+import no.soprasteria.autotest.klienter.vtp.VtpTestdataKlient;
 import no.soprasteria.autotest.klienter.bomsystemet.BomregistreringsKlient;
 import no.soprasteria.autotest.klienter.bomsystemet.InnsynKlient;
 
@@ -15,11 +15,15 @@ class Oppgave4 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
     private static final InnsynKlient kravKlient = new InnsynKlient();
-    private static final VtpKlient vtpKlient = new VtpKlient();
+    private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
 
+    /**
+     * For at denne testen skal gå grønn så må du lage en mock av personregisteret i Skatteetaten og redirecter
+     * trafikk mot denne til mocken istedenfor.
+     */
     @Test
     void sendInnForbipssdasseringerTilBomsystem() {
-        var testperson = vtpKlient.opprettTestperson();
+        var testperson = vtpTestdataKlient.opprettTestperson();
         var bompassering = BompasseringGenerator.lagBompassering(testperson.kjøretøy().registreringsnummer());
         var bompasseringRegistrert = bomregistreringsKlient.sendInnPassering(bompassering);
         assertThat(bompasseringRegistrert).isTrue();
