@@ -22,11 +22,12 @@ class Oppgave3 {
      * Bruk VTP klienten til å opprette et kjøretøy i VTP. Du vil deretter motta Testdata fra VTP.
      * Fra testdataen, hent ut kjøretøy og registreringsnummeret forbunnet med dette kjøretøyet.
      * Bruk dette registreringsnummeret ved oppretting av bompassering.
-     *      HINT: vtpKlient.opprettTestperson()
+     *      HINT: vtpTestdataKlient.opprettTestperson()
      */
     @Test
     void sendInnForbipssdasseringerTilBomsystem() {
-        // Generer testdata og bruk dette når du lager bompasseringer.
+        // Generer testdata og bruk dette når du lager bompasseringer. Erstatt registreringsnummeret
+        // (som nå er satt til null) med registreringsnummrert fra testpersonens kjøretøy.
 
         Registreringsnummer registreringsnummer = null; // Sett dette til et gyldig registreringsnummer
         var bompassering = BompasseringGenerator.lagBompassering(registreringsnummer);
