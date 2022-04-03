@@ -24,7 +24,7 @@ class Oppgave3 {
      * Fra testdataen, hent ut kjøretøy og registreringsnummeret forbunnet med dette kjøretøyet.
      * Bruk dette registreringsnummeret ved oppretting av bompassering.
      *      HINT: Bruk metoden vtpTestdataKlient.opprettTestperson() for å hente en Testperson.
-     *            Bruk registreringsnummeret til kjøretøyet som er registrert på testpersonen ved bompassering.
+     *            Bruk registreringsnummeret til kjøretøyet som er registrert på testpersonen når du generer bompassering.
      */
     @Test
     void sendInnForbipssdasseringerTilBomsystem() {

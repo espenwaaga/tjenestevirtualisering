@@ -51,16 +51,5 @@ public class PersonMockKontroller {
      *  Sitter du fast kan du hente inspirasjon fra
      *  @see KjøretøyMockKontroller eller løsningsforslaget i filen PersonMockKontrollerLøsningsforslag.txt i samme mappe
      */
-    @GetMapping(value = "/{fnr}")
-    public Person hentPersonInfo(@PathVariable("fnr") Fødselsnummer fnr) {
-        LOG.info("Henter informasjon om borger med fødselsnummer [{}]", fnr);
-        var person = personregister.get(fnr);
-        if (person == null) {
-            LOG.warn("Person med fødselsnummer {} finnes ikke i registeret til skattetaten!", fnr);
-            return null;
-        }
-        LOG.info("Returnere informasjon om person");
-        return person;
-    }
 
 }
