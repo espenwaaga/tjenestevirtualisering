@@ -1,16 +1,13 @@
 package no.soprasteria.felles.kontrakter.bomsystem.felles;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Max;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public record Registreringsnummer(@JsonValue String value) {
+public record Registreringsnummer(@JsonValue @Max(value = 7) String value) {
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    @Valid
-    @Max(value = 7)
     public Registreringsnummer {
     }
 

@@ -23,7 +23,7 @@ import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 class Oppgave8 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
-    private static final InnsynKlient kravKlient = new InnsynKlient();
+    private static final InnsynKlient innsynKlient = new InnsynKlient();
     private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
 
 
@@ -45,11 +45,11 @@ class Oppgave8 {
         bomregistreringsKlient.sendInnPassering(bompassering2);
         bomregistreringsKlient.sendInnPassering(bompassering1);
 
-        var krav = kravKlient.hentAlleKravPåPerson(testperson.fnr());
+        var krav = innsynKlient.hentAlleKravPåPerson(testperson.fnr());
         assertThat(krav).hasSize(1);
 
         /**
-         * Husk å endre variabelen 'bompasseringer-ikke-kronologisk' som er definert i application-del2-4.yml under bomsystemet.
+         * Husk å endre variabelen 'bompasseringer-ikke-kronologisk' som er definert i application-del2.yml under bomsystemet.
          * Sett denne verdien til 'true'. Etter endringen må du også huske å kjøre ned og opp bomsystemet igjen.
          */
 

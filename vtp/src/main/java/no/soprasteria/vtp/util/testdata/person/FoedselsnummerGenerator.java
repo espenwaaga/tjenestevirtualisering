@@ -24,7 +24,6 @@ public class FoedselsnummerGenerator {
         } else {
             this.kjonn = Kjønn.randomKjonn();
         }
-//        this.identType = Objects.requireNonNullElse(fgb.identType, IdentType.FNR);
         this.fodselsdato = Objects.requireNonNullElseGet(fgb.fodselsdato, FødselsdagGenerator::genererEnGyldigRandomFødselsdag);
     }
 

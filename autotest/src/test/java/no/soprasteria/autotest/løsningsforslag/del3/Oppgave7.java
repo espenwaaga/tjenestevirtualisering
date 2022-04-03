@@ -25,7 +25,7 @@ class Oppgave7 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
 
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
-    private static final InnsynKlient kravKlient = new InnsynKlient();
+    private static final InnsynKlient innsynKlient = new InnsynKlient();
     private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
 
     /**
@@ -39,7 +39,7 @@ class Oppgave7 {
         var testperson1 = vtpTestdataKlient.opprettTestperson();
         var bompassering1_1 = BompasseringGenerator.lagBompassering(testperson1.kjøretøy().registreringsnummer(), LocalDateTime.now().minusHours(2));
         bomregistreringsKlient.sendInnPassering(bompassering1_1);
-        var opprinneligKrav = kravKlient.hentAlleKravPåPerson(testperson1.fnr());
+        var opprinneligKrav = innsynKlient.hentAlleKravPåPerson(testperson1.fnr());
         assertThat(opprinneligKrav).hasSize(1);
 
 
@@ -55,7 +55,7 @@ class Oppgave7 {
         var bompasseringPerson3_1 = BompasseringGenerator.lagBompassering(testperson3.kjøretøy().registreringsnummer(), LocalDateTime.now().minusHours(2).minusSeconds(5));
         bomregistreringsKlient.sendInnPassering(bompasseringPerson3_1);
 
-        var kravEtterPerson2Og3ErRegistrert = kravKlient.hentAlleKravPåPerson(testperson1.fnr());
+        var kravEtterPerson2Og3ErRegistrert = innsynKlient.hentAlleKravPåPerson(testperson1.fnr());
         assertThat(kravEtterPerson2Og3ErRegistrert)
                 .hasSize(1)
                 .isEqualTo(opprinneligKrav);
