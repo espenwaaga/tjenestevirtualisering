@@ -13,7 +13,6 @@ import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 
 class Oppgave3 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
-
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
     private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
 
@@ -21,7 +20,7 @@ class Oppgave3 {
     @Test
     void sendInnForbipssdasseringerTilBomsystem() {
         var testperson = vtpTestdataKlient.opprettTestperson(); // Opprett testdata
-        Registreringsnummer registreringsnummer = testperson.kjøretøy().registreringsnummer(); // Henter ut regnummer
+        Registreringsnummer registreringsnummer = testperson.kjøretøy().registreringsnummer(); // Henter ut regnummer på kjøretøyet til testpersonen
         var bompassering = BompasseringGenerator.lagBompassering(registreringsnummer);
         var bompasseringErRegistrert = bomregistreringsKlient.sendInnPassering(bompassering);
         assertThat(bompasseringErRegistrert).isTrue();

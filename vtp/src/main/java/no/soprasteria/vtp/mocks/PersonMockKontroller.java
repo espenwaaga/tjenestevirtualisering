@@ -3,7 +3,13 @@ package no.soprasteria.vtp.mocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import no.soprasteria.felles.kontrakter.bomsystem.felles.Fødselsnummer;
+import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
 import no.soprasteria.vtp.register.Personregister;
 
 
@@ -15,8 +21,8 @@ import no.soprasteria.vtp.register.Personregister;
  */
 
 
-//@RestController()
-//@RequestMapping(PersonMockKontroller.PERSON_PATH)
+@RestController()
+@RequestMapping(PersonMockKontroller.PERSON_PATH)
 public class PersonMockKontroller {
     private static final Logger LOG = LoggerFactory.getLogger(PersonMockKontroller.class);
     private static final String FNR_PATH_PARAM = "fnr";
@@ -37,7 +43,7 @@ public class PersonMockKontroller {
      *  1) Riktig path (/person/{fnr})
      *  2) Vi skal hente ut fødselsnummeret slik at vi kan slå opp i personregisteret
      *  3) Metoden returnerer objektet Person som allerede er definert.
-     *  4) Hvis personen ikke finnes i registeret, returner null.
+     *  4) Hvis personen ikke finnes i registeret i VTP, returner null.
      *
      * @param fnr er fødselsnummeret som er oppgitt i requesten.
      * @return Person hvis person finnes, ellers null
@@ -45,5 +51,16 @@ public class PersonMockKontroller {
      *  Sitter du fast kan du hente inspirasjon fra
      *  @see KjøretøyMockKontroller eller løsningsforslaget i filen PersonMockKontrollerLøsningsforslag.txt i samme mappe
      */
+    @GetMapping(value = "/{fnr}")
+    public Person hentPersonInfo(@PathVariable("fnr") Fødselsnummer fnr) {
+        LOG.info("Henter informasjon om borger med fødselsnummer [{}]", fnr);
+        var person = personregister.get(fnr);
+        if (person == null) {
+            LOG.warn("Person med fødselsnummer {} finnes ikke i registeret til skattetaten!", fnr);
+            return null;
+        }
+        LOG.info("Returnere informasjon om person");
+        return person;
+    }
 
 }

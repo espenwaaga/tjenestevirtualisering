@@ -31,7 +31,8 @@ class Oppgave3 {
         // Generer testdata og bruk dette når du lager bompasseringer. Erstatt registreringsnummeret
         // (som nå er satt til null) med registreringsnummrert fra testpersonens kjøretøy.
 
-        Registreringsnummer registreringsnummer = null; // TODO: Erstatt 'null' med et gyldig registreringsnummer fra VTP
+        // TODO: Erstatt 'new Registreringsnummer("SV12345")' med et gyldig registreringsnummer fra testpersonen i VTP
+        Registreringsnummer registreringsnummer = new Registreringsnummer("SV12345");
         var bompassering = BompasseringGenerator.lagBompassering(registreringsnummer);
         var bompasseringRegistrert = bomregistreringsKlient.sendInnPassering(bompassering);
         assertThat(bompasseringRegistrert).isTrue();

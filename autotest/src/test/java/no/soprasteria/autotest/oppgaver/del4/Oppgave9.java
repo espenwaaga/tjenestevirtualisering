@@ -25,7 +25,7 @@ import no.soprasteria.felles.kontrakter.bomsystem.felles.Registreringsnummer;
 class Oppgave9 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
-    private static final InnsynKlient kravKlient = new InnsynKlient();
+    private static final InnsynKlient innsynKlient = new InnsynKlient();
     private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
     private static final VtpSimulerIkkeFunskjonelleKravKlient vtpSimulerIkkeFunksjonlleKravKlient = new VtpSimulerIkkeFunskjonelleKravKlient();
 

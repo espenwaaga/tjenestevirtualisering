@@ -24,19 +24,16 @@ class Oppgave1 {
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
 
     @Test
-    void sendInnBompasseringerTilBomsystem() {
+    void sendInnBompasseringerTilBomsystem() throws Exception {
         var randomRegistereringsnummer = new Registreringsnummer("SV12345");
         var bompassering = BompasseringGenerator.lagBompassering(randomRegistereringsnummer);
 
         // Verifiserer at kallet hiver en forventet exception
-        var exception = assertThrows(ResponseStatusException.class,
-                () -> bomregistreringsKlient.sendInnPassering(bompassering));
-        assertThat(exception.getMessage())
-                .as("Feilmelding til Exception")
-                .contains(FORVENTET_EXCEPTION_MESSAGE);
-        assertThat(exception.getStatus())
-                .as("Status kode til Exception")
-                .isEqualTo(FORVENTET_EXCEPTION_STATUS);
+        var exception = assertThrows(Exception.class,
+            () -> bomregistreringsKlient.sendInnPassering(bompassering));
+        if (!exception.getMessage().contains(FORVENTET_EXCEPTION_MESSAGE))  {
+            throw exception;
+        }
 
         LOG.info("Bra jobba! Nå er vi et steg nærmere!");
         LOG.warn("Nå feiler registerering av bompassering med \"{}: {}\"", FORVENTET_EXCEPTION_STATUS, FORVENTET_EXCEPTION_MESSAGE);

@@ -25,7 +25,7 @@ class Oppgave5 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
 
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
-    private static final InnsynKlient kravKlient = new InnsynKlient();
+    private static final InnsynKlient innsynKlient = new InnsynKlient();
     private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
 
 
@@ -46,7 +46,7 @@ class Oppgave5 {
         bomregistreringsKlient.sendInnPassering(bompassering1);
         bomregistreringsKlient.sendInnPassering(bompassering2);
 
-        var krav = kravKlient.hentAlleKravPåPerson(testperson.fnr());
+        var krav = innsynKlient.hentAlleKravPåPerson(testperson.fnr());
         assertThat(krav).hasSize(2);
         assertThat(krav.get(0).beregningsgrunnlag().bompasseringer()).hasSize(1);
         assertThat(krav.get(1).beregningsgrunnlag().bompasseringer()).hasSize(1);

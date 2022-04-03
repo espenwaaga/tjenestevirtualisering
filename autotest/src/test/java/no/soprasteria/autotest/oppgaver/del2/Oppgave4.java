@@ -14,12 +14,13 @@ import no.soprasteria.autotest.klienter.bomsystemet.InnsynKlient;
 class Oppgave4 {
     private static final Logger LOG = LoggerFactory.getLogger(BomregistreringsKlient.class);
     private static final BomregistreringsKlient bomregistreringsKlient = new BomregistreringsKlient();
-    private static final InnsynKlient kravKlient = new InnsynKlient();
+    private static final InnsynKlient innsynKlient = new InnsynKlient();
     private static final VtpTestdataKlient vtpTestdataKlient = new VtpTestdataKlient();
 
     /**
-     * For at denne testen skal gå grønn så må du lage en mock av personregisteret i Skatteetaten og redirecter
-     * trafikk mot denne til mocken istedenfor.
+     * Her skal vi nå gjøre det vi gjorde i del 1 i ett jafs:
+     * Vi skal lage en mock av personregisteret hos Skatteetaten.
+     * Vi skal redirecte traffikk fra Skatt mot Mocken vår i VTP.
      */
     @Test
     void sendInnForbipssdasseringerTilBomsystem() {
@@ -28,7 +29,7 @@ class Oppgave4 {
         var bompasseringRegistrert = bomregistreringsKlient.sendInnPassering(bompassering);
         assertThat(bompasseringRegistrert).isTrue();
 
-        var krav = kravKlient.hentAlleKravPåPerson(testperson.fnr());
+        var krav = innsynKlient.hentAlleKravPåPerson(testperson.fnr());
         assertThat(krav).hasSize(1);
         assertThat(krav.get(0).beregningsgrunnlag().bompasseringer()).hasSize(1);
     }
