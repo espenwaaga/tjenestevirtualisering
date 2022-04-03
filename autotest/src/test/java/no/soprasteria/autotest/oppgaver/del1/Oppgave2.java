@@ -36,7 +36,7 @@ class Oppgave2 {
                 .isEqualTo(FORVENTET_EXCEPTION_STATUS);
 
         LOG.info("Bra jobba! Nå er vi et steg nærmere!");
-        LOG.warn("Nå feiler registerering av bompassering med \"{}: {}\"", FORVENTET_EXCEPTION_STATUS.value(), FORVENTET_EXCEPTION_MESSAGE);
+        LOG.warn("Nå feiler registerering av bompassering med \"{}: {}\"", FORVENTET_EXCEPTION_STATUS, FORVENTET_EXCEPTION_MESSAGE);
         LOG.warn("Vi skal løse dette i Oppgave 3!");
     }
 

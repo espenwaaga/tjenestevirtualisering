@@ -35,7 +35,7 @@ public class PersonMockKontroller {
      * følgende måte: http://localhost:8060/api/person/22222233333 for å hente informasjon om person med fødselsnummer
      * 22222233333. Endepunktet må ha følgende være:
      *  1) Riktig path (/person/{fnr})
-     *  2) Vi skal hente ut fødselsnummeret slik at vi kan slå opp i personregisteret (skriv bedre
+     *  2) Vi skal hente ut fødselsnummeret slik at vi kan slå opp i personregisteret
      *  3) Metoden returnerer objektet Person som allerede er definert.
      *  4) Hvis personen ikke finnes i registeret, returner null.
      *
