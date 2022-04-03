@@ -2,7 +2,7 @@ oppslag:
   kjoretoy:
     base-url: http://localhost:8060
   person:
-    base-url: http://localhost:8060
+    base-url: http://skatteetaten
 bomregistrering:
   automatisk-krav: true
   bompasseringer-ikke-kronologisk-fikset: false # for Oppgave 8, sett denne til true
