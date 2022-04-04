@@ -3,7 +3,7 @@ Disclaimer: All informasjon inkludert fødselsnummer er syntetisk generert til t
 
 Workshop for tjenestevirtualisering og hvordan teste større applikasjoner med tjenestevirtualisering.
 
-Oppgavene kan du finne her -> [Workshop](https://1drv.ms/u/s!AuRX8OnMAAMjgdQninudD2-eYaMU-g?e=X0PA0w)
+Oppgavene kan du finne her -> [Workshop](https://1drv.ms/w/s!AuRX8OnMAAMjgdQz8Lh3l71Tx9FwGA?e=LlXJp9)
 (Linken fungere ikke nå. Fiks denne til senere)
 
 ## Utviklingsoppsett
