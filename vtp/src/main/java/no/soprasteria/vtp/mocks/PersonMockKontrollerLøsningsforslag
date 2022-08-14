@@ -31,7 +31,6 @@ public class PersonMockKontrollerLøsningsforslag {
         var person = personregister.get(fnr);
         if (person == null) {
             LOG.warn("Person med fødselsnummer {} finnes ikke i registeret til skattetaten!", fnr);
-            return null;
         }
         LOG.info("Returnere informasjon om person");
         return person;

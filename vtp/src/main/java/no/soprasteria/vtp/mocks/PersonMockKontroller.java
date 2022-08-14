@@ -44,7 +44,8 @@ public class PersonMockKontroller {
      *              1) Riktig path (/{fnr})
      *              2) Hent ut fødselsnummeret fra Path parameter (hint @PathParam)
      *              3) Bruke dette fødselsnummeret til å slå opp person i personregisteret
-     *              4) Metoden returnerer objektet Person som allerede er definert.
+     *              4) Metoden/endepunktet returnerer Person objektet hentet fra registeret
+     *              5) Optional: Hvis personen ikke finnes i registeret, logg en warning med LOG.warn("warning!")
      *
      *
      *  @param fnr er fødselsnummeret som er oppgitt som path param i requesten.
