@@ -1,4 +1,4 @@
-# tjenestevirtualisering
+# Tjenestevirtualisering
 Disclaimer: All informasjon inkludert fødselsnummer er syntetisk generert til test-formål og har ingen kobling til reelle personer.
 
 Workshop for tjenestevirtualisering og hvordan teste større applikasjoner med tjenestevirtualisering.

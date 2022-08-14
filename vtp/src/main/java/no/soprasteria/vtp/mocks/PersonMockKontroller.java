@@ -13,20 +13,11 @@ import no.soprasteria.felles.kontrakter.bomsystem.person.Person;
 import no.soprasteria.vtp.register.Personregister;
 
 
-/**
- *
- * For at PersonMOckKontrolleren skal være registert på serveren så måm den annoteres med @RestController()
- * Vi ønsker å nå denne kontrolleren på 'http://localhost:8060/api/person' og gjør dette med å spesifisere
- * stien etter http://localhost:8060/api i en @RequestMapping(PersonMockKontroller.PERSON_PATH).
- */
-
-
 @RestController()
 @RequestMapping(PersonMockKontroller.PERSON_PATH)
 public class PersonMockKontroller {
+    static final String PERSON_PATH = "/person";
     private static final Logger LOG = LoggerFactory.getLogger(PersonMockKontroller.class);
-    private static final String FNR_PATH_PARAM = "fnr";
-    protected static final String PERSON_PATH = "/person";
 
     private final Personregister personregister;
 
@@ -36,17 +27,28 @@ public class PersonMockKontroller {
     }
 
     /**
+     *  For at PersonMockKontroller skal registreres på serveren så må klassen annoteres med @RestController()
+     *  Vi ønsker å nå denne kontrolleren på 'http://localhost:8060/api/person' og gjør dette med å spesifisere
+     *  stien etter http://localhost:8060/api i @RequestMapping annotering. Dette har vi allerede gjort.
+     *   - Root path til applikasjonen er satt og alle API kan nås på http://localhost:8060/api
+     *   - Path til denne kontrolleren er satt til /person
+     *   - Som resulterer i at kontrolleren kan da nås på http://localhost:8060/api/person
      *
-     * Lag en GET metode for å hente ut person fra personregisteret. Vi kommer til å kalle dette endepunktet på
-     * følgende måte: http://localhost:8060/api/person/22222233333 for å hente informasjon om person med fødselsnummer
-     * 22222233333. Endepunktet må ha følgende være:
-     *  1) Riktig path (/person/{fnr})
-     *  2) Vi skal hente ut fødselsnummeret slik at vi kan slå opp i personregisteret
-     *  3) Metoden returnerer objektet Person som allerede er definert.
-     *  4) Hvis personen ikke finnes i registeret i VTP, returner null.
      *
-     * @param fnr er fødselsnummeret som er oppgitt i requesten.
-     * @return Person hvis person finnes, ellers null
+     *
+     *  OPPGAVE: Lag en GET metode for å hente ut person fra personregisteret. Vi kommer til å kalle (GET kall)
+     *           dette endepunktet med url http://localhost:8060/api/person/{fnr} hvor fnr er et fødselsnummer på
+     *           11 siffer satt av klienten som kaller.
+     *
+     *           Endepunktet må ha følgende egenskaper:
+     *              1) Riktig path (/{fnr})
+     *              2) Hent ut fødselsnummeret fra Path parameter (hint @PathParam)
+     *              3) Bruke dette fødselsnummeret til å slå opp person i personregisteret
+     *              4) Metoden returnerer objektet Person som allerede er definert.
+     *
+     *
+     *  @param fnr er fødselsnummeret som er oppgitt som path param i requesten.
+     *  @return Person
      *
      *  Sitter du fast kan du hente inspirasjon fra
      *  @see KjøretøyMockKontroller eller løsningsforslaget i filen PersonMockKontrollerLøsningsforslag.txt i samme mappe
