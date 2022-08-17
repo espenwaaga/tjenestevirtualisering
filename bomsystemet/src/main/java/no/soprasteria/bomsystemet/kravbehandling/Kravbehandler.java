@@ -54,6 +54,7 @@ public class Kravbehandler {
     }
 
     //  ----------------------------------------------
+    // Under illustrerer * bompasseringer og [      ] er et krav
     // Ingen endring
     //            [*      ]
     //                 *
